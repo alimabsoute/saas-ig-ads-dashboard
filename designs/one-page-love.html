@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>03 — One Page Love · The SaaS Ad Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#111;--grey:#6b6b6b;--tint:#f6f6f5;--green:#1a9e54;--red:#e5484d;--ease:cubic-bezier(.32,.72,0,1)}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;background:#fff}
+a.back{position:fixed;top:20px;left:20px;z-index:60;font-size:12px;color:var(--ink);text-decoration:none;font-family:"IBM Plex Mono",monospace}
+nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 32px;background:rgba(255,255,255,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);-webkit-mask-image:linear-gradient(to bottom,black 60%,transparent);mask-image:linear-gradient(to bottom,black 60%,transparent);padding-bottom:28px}
+nav .logo{font-weight:700;letter-spacing:-.02em}
+nav .links{display:flex;gap:26px;align-items:center}
+nav .links a{font-size:14px;color:var(--ink);text-decoration:none}
+.btn{background:var(--ink);color:#fff;font-size:14px;font-weight:600;padding:12px 24px;border-radius:8px;border:none;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.06);text-decoration:none;display:inline-block;transition:transform .2s var(--ease)}
+.btn:hover{transform:translateY(-1px)}
+.hero{padding:90px 24px 0;text-align:center;max-width:1100px;margin:0 auto}
+.hero h1{font-size:clamp(2.5rem,8vw,7rem);font-weight:500;letter-spacing:-.03em;line-height:1.08;text-wrap:balance;opacity:0;animation:up .6s var(--ease) forwards}
+.hero .sub{font-size:17px;color:var(--grey);max-width:56ch;margin:24px auto 0;line-height:1.6;opacity:0;animation:up .6s var(--ease) .08s forwards}
+.hero .cta-row{margin-top:32px;opacity:0;animation:up .6s var(--ease) .16s forwards}
+.hero .micro{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--grey);margin-top:16px;opacity:0;animation:up .6s var(--ease) .25s forwards}
+@keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.mock{max-width:1020px;margin:56px auto 0;border:1px solid #e4e4e2;border-radius:14px 14px 0 0;overflow:hidden;background:#fff;box-shadow:0 30px 80px -30px rgba(0,0,0,.18);position:relative}
+.mock .chrome{display:flex;gap:8px;padding:12px 16px;border-bottom:1px solid #ececea;background:#fafafa;align-items:center}
+.mock .chrome i{width:11px;height:11px;border-radius:50%;background:#ddd;display:block}
+.mock .chrome span{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--grey);margin-left:8px}
+.mock .body{padding:44px;position:relative;min-height:380px;background:linear-gradient(#fff, #fff)}
+.mock .body::after{content:"";position:absolute;inset:auto 0 0 0;height:120px;background:linear-gradient(transparent,#fff)}
+.dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.dash-top h4{font-size:15px;font-weight:600}
+.dash-top .live{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--green)}
+.digits{display:flex;gap:6px;margin-bottom:8px}
+.digit{width:54px;height:74px;background:var(--ink);color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Mono",monospace;font-size:34px;font-weight:600;overflow:hidden}
+.digit span{display:inline-block;animation:roll 6s ease-in-out infinite}
+@keyframes roll{0%,42%{transform:translateY(0)}50%,92%{transform:translateY(-100%)}100%{transform:translateY(-200%)}}
+.digit .col{display:flex;flex-direction:column}
+.dash-label{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--grey);letter-spacing:.08em;margin-bottom:32px}
+.statcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px}
+.scard{border:1px solid #ececea;border-radius:10px;padding:18px;opacity:0;animation:up .5s var(--ease) forwards}
+.scard:nth-child(1){animation-delay:1s}.scard:nth-child(2){animation-delay:1.15s}.scard:nth-child(3){animation-delay:1.3s}
+.scard .v{font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:600}
+.scard .k{font-size:12px;color:var(--grey);margin-top:4px}
+.scard .d{font-size:11px;font-weight:600;margin-top:6px}.up{color:var(--green)}.dn{color:var(--red)}
+.chart{height:120px}
+.chart path{stroke:var(--ink);stroke-width:2.5;fill:none;stroke-dasharray:1200;stroke-dashoffset:1200;animation:draw 2.2s var(--ease) 1.2s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.cursor-chip{position:absolute;top:120px;left:12%;display:flex;align-items:center;gap:8px;animation:glide 9s ease-in-out infinite;z-index:5}
+.cursor-chip svg{filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+.cursor-chip span{background:var(--ink);color:#fff;font-size:11px;font-weight:600;padding:5px 10px;border-radius:20px;font-family:"IBM Plex Mono",monospace}
+@keyframes glide{0%,100%{transform:translate(0,0)}25%{transform:translate(280px,60px)}50%{transform:translate(480px,-30px)}75%{transform:translate(180px,120px)}}
+section{padding:96px 24px;max-width:1100px;margin:0 auto}
+section.tint{background:var(--tint)}
+.sec-label{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-bottom:18px}
+h2.sec{font-size:36px;font-weight:500;letter-spacing:-.02em;margin-bottom:14px;text-wrap:balance}
+.sec-sub{font-size:16px;color:var(--grey);max-width:60ch;line-height:1.65;margin-bottom:40px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.filters button{font-family:"IBM Plex Mono",monospace;font-size:12px;padding:9px 18px;border-radius:100px;border:1px solid #dcdcdc;background:#fff;cursor:pointer}
+.filters button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{border:1px solid #ececea;border-radius:12px;padding:24px;background:#fff;display:flex;flex-direction:column;gap:12px;transition:transform .3s var(--ease),box-shadow .3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -18px rgba(0,0,0,.2)}
+.card .meta{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--grey);letter-spacing:.06em}
+.card h3{font-size:18px;font-weight:600;letter-spacing:-.015em;line-height:1.3}
+.card p{font-size:14px;color:var(--grey);line-height:1.6}
+.card .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:8px}
+.card .run{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--grey)}
+.card .cta{font-size:13px;font-weight:600}
+.rows{display:flex;flex-direction:column}
+.prow{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:56px 0;min-height:340px}
+.prow+.prow{border-top:1px solid #ececea}
+.prow h3{font-size:28px;font-weight:500;letter-spacing:-.02em;margin-bottom:12px}
+.prow p{font-size:15px;color:var(--grey);line-height:1.7;max-width:44ch}
+.pnum{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--grey);letter-spacing:.1em;margin-bottom:12px;display:block}
+.pviz{background:var(--ink);color:#fff;border-radius:12px;min-height:240px;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Mono",monospace;font-size:13px;padding:32px;text-align:center;line-height:1.8}
+.final{text-align:center;padding:120px 24px}
+.final h2{font-size:clamp(2rem,5vw,3.6rem);font-weight:500;letter-spacing:-.025em;margin-bottom:20px;text-wrap:balance}
+.final p{color:var(--grey);margin-bottom:32px}
+footer{border-top:1px solid #ececea;padding:40px 32px;display:flex;justify-content:space-between;font-size:13px;color:var(--grey);font-family:"IBM Plex Mono",monospace;font-size:11px}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media(max-width:860px){.cards,.prow,.statcards{grid-template-columns:1fr}.prow{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← index</a>
+<nav><div class="logo">AdLibrary · 03</div><div class="links"><a href="#library">Library</a><a href="#patterns">Patterns</a><a class="btn" href="#library" style="padding:9px 18px">Browse the ads</a></div></nav>
+
+<header class="hero">
+  <h1>Every winning SaaS ad.<br>One searchable library.</h1>
+  <p class="sub">61 entries with verbatim copy and verified Meta Ad Library run dates. No vanity metrics, no fluff — just the creative that's actually running.</p>
+  <div class="cta-row"><a class="btn" href="#library">Browse the ads</a></div>
+  <div class="micro">46 PAID · 15 ORGANIC · UPDATED SEP 18 2026</div>
+</header>
+
+<div class="mock" aria-hidden="true">
+  <div class="chrome"><i></i><i></i><i></i><span>adlibrary.app/dashboard</span></div>
+  <div class="body">
+    <div class="cursor-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="#111"><path d="M5 3l14 7-6.5 1.5L9 18z"/></svg><span>Planning</span></div>
+    <div class="dash-top"><h4>Live creative tracker</h4><span class="live">● TRACKING</span></div>
+    <div class="digits">
+      <div class="digit"><span class="col"><span>6</span><span>6</span><span>6</span></span></div>
+      <div class="digit"><span class="col"><span>1</span><span>1</span><span>1</span></span></div>
+    </div>
+    <div class="dash-label">ENTRIES INDEXED — VERBATIM COPY</div>
+    <div class="statcards">
+      <div class="scard"><div class="v">46</div><div class="k">Paid ads · Meta Ad Library</div><div class="d up">▲ verified Sep 18</div></div>
+      <div class="scard"><div class="v">15</div><div class="k">Organic posts · Instagram</div><div class="d up">▲ 11 big brand · 4 indie</div></div>
+      <div class="scard"><div class="v">203d</div><div class="k">Longest active run</div><div class="d dn">HeadshotPro · since Feb 27</div></div>
+    </div>
+    <svg class="chart" viewBox="0 0 600 120" preserveAspectRatio="none"><path d="M0,100 C60,90 90,70 140,72 C190,74 210,40 270,44 C330,48 350,20 410,24 C470,28 520,10 600,12"/></svg>
+  </div>
+</div>
+
+<section id="library">
+  <div class="sec-label rv">The library</div>
+  <h2 class="sec rv">Real ads. Real copy. Real dates.</h2>
+  <p class="sec-sub rv">Every card below is a live Meta Ad Library entry — headline and primary text recorded verbatim. Filter by type or category.</p>
+  <div class="filters rv" id="filters">
+    <button class="on" data-f="all">All</button><button data-f="paid">Paid</button><button data-f="organic">Organic</button>
+    <button data-f="AI tools">AI tools</button><button data-f="marketing">Marketing</button><button data-f="productivity">Productivity</button><button data-f="design">Design</button>
+  </div>
+  <div class="cards" id="cards"></div>
+</section>
+
+<section class="tint" id="patterns" style="max-width:none"><div style="max-width:1100px;margin:0 auto">
+  <div class="sec-label rv">The playbook</div>
+  <h2 class="sec rv">Four patterns, zero opinions.</h2>
+  <div class="rows">
+    <div class="prow rv"><div><span class="pnum">PATTERN 01</span><h3>Longevity is the metric</h3><p>Meta publishes no CTR. But HeadshotPro has run one ad since February 27, 2026 — 203 days. Nobody burns budget that long on creative that doesn't work.</p></div><div class="pviz">203 DAYS<br>ONE AD · STILL RUNNING<br><span style="opacity:.6">HeadshotPro · AI headshots</span></div></div>
+    <div class="prow rv"><div class="pviz">✅ 100% ONLINE<br>✅ NO APPOINTMENTS<br>✅ 2 HOURS OR LESS<br><span style="opacity:.6">specificity &gt; adjectives</span></div><div><span class="pnum">PATTERN 02</span><h3>Checklists beat cleverness</h3><p>The longest-running ad in the set is a bulleted list of promises. Each line removes one objection. Steal the format for inkspell and oporae.</p></div></div>
+    <div class="prow rv"><div><span class="pnum">PATTERN 03</span><h3>Pick a fight</h3><p>Monday.com runs conquest ads against Airtable users. ClickUp: “One app instead of ten.” Semrush: “Don't disappear in AI.” A named enemy focuses the message.</p></div><div class="pviz">“UPGRADE FROM<br>AIRTABLE”<br><span style="opacity:.6">monday.com · conquest creative</span></div></div>
+    <div class="prow rv"><div class="pviz">FREE INSTAGRAM GUIDE<br>RUNNING SINCE MAR 24<br><span style="opacity:.6">HubSpot · lead magnet</span></div><div><span class="pnum">PATTERN 04</span><h3>Give the playbook away</h3><p>HubSpot's free Instagram guide has run since March. The offer is the ad. Six months of spend says it works.</p></div></div>
+  </div>
+</div></section>
+
+<div class="final">
+  <h2 class="rv">Stop guessing what to post.<br>Steal what already runs.</h2>
+  <p class="rv">61 entries. Verbatim copy. Verified dates.</p>
+  <a class="btn rv" href="#library">Browse the ads</a>
+</div>
+
+<footer><span>DIRECTION 03 — ONE PAGE LOVE</span><span>RESEARCH · SEP 18 2026</span></footer>
+
+<script>
+const ADS=[
+{b:"HeadshotPro",t:"paid",c:"AI tools",h:"Best AI Headshots 🏆",x:"Professional business headshots, done for you in 2 hours or less. 100% online, no appointments.",cta:"Learn more",r:"SINCE FEB 27 · 2026"},
+{b:"HubSpot",t:"paid",c:"marketing",h:"Free Instagram Strategies",x:"Ready to see ROI on your Instagram posts? Get our free guide to Instagram for business.",cta:"Get offer",r:"SINCE MAR 24 · 2026"},
+{b:"Notion",t:"paid",c:"productivity",h:"Solve Work with Notion.",x:"Create Custom AI Agents to automate your work — weekly reports to ticket triage.",cta:"Sign up",r:"SINCE AUG 05 · 2026"},
+{b:"Semrush",t:"paid",c:"marketing",h:"Don't disappear in AI",x:"AI now reads Reddit, LinkedIn, and reviews too. Not just your website.",cta:"Learn more",r:"SINCE JUN 05 · 2026"},
+{b:"Canva",t:"paid",c:"design",h:"Try Canva Magic Layers",x:"Slice any flat image into a fully editable design.",cta:"Learn more",r:"SINCE JUN 05 · 2026"},
+{b:"Monday.com",t:"paid",c:"productivity",h:"Upgrade from Airtable",x:"Why settle for Airtable? More power, flexibility, and speed. Try it free.",cta:"Sign up",r:"SINCE SEP 07 · 2026"},
+{b:"HyNote",t:"paid",c:"AI tools",h:"AI Note Taker",x:"Comment “notes” for a free pass. #adhd #university #notetaking",cta:"Install now",r:"SINCE MAY 26 · 2026"},
+{b:"Duolingo",t:"organic",c:"marketing",h:"The unhinged owl",x:"Mascot chaos content. Threatens and roasts followers into doing lessons.",cta:"Follow",r:"ORGANIC · FEB 2025 STUNT"},
+{b:"Descript",t:"organic",c:"marketing",h:"How it started vs. going",x:"Meme-reel format: scrappy beginnings → polished product. Built for shares.",cta:"Follow",r:"ORGANIC · MEME FORMAT"}
+];
+const grid=document.getElementById('cards');
+ADS.forEach(a=>{
+  const d=document.createElement('div');d.className='card rv';d.dataset.t=a.t;d.dataset.c=a.c;
+  d.innerHTML=`<div class="meta">${a.t.toUpperCase()} · ${a.c.toUpperCase()}</div><h3>${a.b} — “${a.h}”</h3><p>${a.x}</p><div class="foot"><span class="run">${a.r}</span><span class="cta">${a.cta} →</span></div>`;
+  grid.appendChild(d);
+});
+document.getElementById('filters').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('on'));
+  e.target.classList.add('on');const f=e.target.dataset.f;
+  document.querySelectorAll('.card').forEach(c=>{c.style.display=(f==='all'||c.dataset.t===f||c.dataset.c===f)?'flex':'none'});
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
