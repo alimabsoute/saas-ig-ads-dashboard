@@ -1,0 +1,224 @@
+{
+ "1788779402309312": {
+  "status": "ok",
+  "brand": "Slack",
+  "format": "video",
+  "files": [
+   {
+    "file": "assets/creatives/1788779402309312.mp4",
+    "bytes": 766035
+   },
+   {
+    "file": "assets/creatives/1788779402309312-poster.jpg",
+    "bytes": 32556
+   }
+  ],
+  "cta": "Learn more",
+  "start_date": "Sep 1, 2026",
+  "primary_text_start": "Slackbot already knows your work. Your conversations, projects, and tools. No setup needed. AI that's been there a",
+  "headline": "Slack",
+  "note": "Ad has 4 versions; creative URLs taken from the first version (id 1788779402309312). Display link HTTPS://SLACK.COM/FEATURES/AI."
+ },
+ "1660110598839124": {
+  "status": "ok",
+  "brand": "Asana",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1660110598839124-img0.jpg",
+    "bytes": 21828
+   }
+  ],
+  "cta": "Learn More",
+  "start_date": "Sep 18, 2026",
+  "primary_text_start": "Let your people focus on the work only they can do. See how your team can get to market faster.",
+  "headline": "Create your free account",
+  "note": "Ad has 2 versions; image taken from version 1 creative."
+ },
+ "HubSpot": {
+  "status": "partial",
+  "note": "Video player failed to render; no media URLs captured. Ad has 5 versions. Already covered in Task A (thumbnails unavailable)."
+ },
+ "1025567766894244": {
+  "status": "ok",
+  "brand": "Salesforce",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1025567766894244-img0.jpg",
+    "bytes": 53906
+   }
+  ],
+  "cta": "Learn more",
+  "start_date": "Aug 5, 2026",
+  "primary_text_start": "Live Nation fields hundreds of fan questions before live shows across the country. Bag policies, parking, show times, and mo",
+  "headline": "Venue Agent powered by Agentforce",
+  "note": "2 ads use this creative and text; image taken from version 1."
+ },
+ "1056573077011276": {
+  "status": "ok",
+  "brand": "Zendesk",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1056573077011276-img0.jpg",
+    "bytes": 31618
+   }
+  ],
+  "cta": "Learn More",
+  "start_date": "Sep 8, 2026",
+  "primary_text_start": "Enough shadowing. Enough experimenting. AI agents are ready for a real job.",
+  "headline": "Specialized Agents from Zendesk",
+  "note": "4 versions; image taken from version 1."
+ },
+ "1057863053425906": {
+  "status": "ok",
+  "brand": "Zoom",
+  "format": "video",
+  "files": [
+   {
+    "file": "assets/creatives/1057863053425906.mp4",
+    "bytes": 2172016
+   },
+   {
+    "file": "assets/creatives/1057863053425906-poster.jpg",
+    "bytes": 135258
+   }
+  ],
+  "cta": "See details",
+  "start_date": "Aug 26, 2026",
+  "primary_text_start": "#ad everyone tells me i work too hard & that i should take a break. but for small business owners, taking breaks often means co",
+  "headline": "leelajournals",
+  "note": "Branded-content ad posted by 'leelajournals' with Zoom (ZoomMate campaign); display link ZOOM.COM."
+ },
+ "1387911703473580": {
+  "status": "ok",
+  "brand": "Grammarly",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1387911703473580-img0.jpg",
+    "bytes": 32025
+   }
+  ],
+  "cta": "Download",
+  "start_date": "Jul 15, 2026",
+  "primary_text_start": "Revisi\u00f3n en tiempo real de todo lo que escribes.",
+  "headline": "Escribe con fluidez",
+  "note": "Spanish-language ad targeting the US (links to grammarly.com/es)."
+ },
+ "1302137128662387": {
+  "status": "ok",
+  "brand": "Adobe",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1302137128662387-img0.jpg",
+    "bytes": 32765
+   }
+  ],
+  "cta": "Learn More",
+  "start_date": "Aug 1, 2026",
+  "primary_text_start": "",
+  "headline": "Save big. Create more.",
+  "note": "3 versions; image taken from version 1. No primary text shown on the card (link-only creative)."
+ },
+ "1923089791697528": {
+  "status": "ok",
+  "brand": "Dropbox",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1923089791697528-img0.jpg",
+    "bytes": 26896
+   }
+  ],
+  "cta": "Learn More",
+  "start_date": "Aug 4, 2026",
+  "primary_text_start": "There's only one way to know if the studio riff is your next hit single.",
+  "headline": "Share more with Dropbox",
+  "note": "3 versions; image taken from version 1."
+ },
+ "561313682937526": {
+  "status": "ok",
+  "brand": "Datadog",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/561313682937526-img0.jpg",
+    "bytes": 28806
+   }
+  ],
+  "cta": "Download",
+  "start_date": "Oct 28, 2024",
+  "primary_text_start": "Learn how to achieve faster development cycles and enhanced agility in responding to market needs.",
+  "headline": "DevOps Kit",
+  "note": "3 versions; image taken from version 1."
+ },
+ "1905289040148310": {
+  "status": "ok",
+  "brand": "Hootsuite",
+  "format": "video",
+  "files": [
+   {
+    "file": "assets/creatives/1905289040148310.mp4",
+    "bytes": 864276
+   },
+   {
+    "file": "assets/creatives/1905289040148310-poster.jpg",
+    "bytes": 14422
+   }
+  ],
+  "cta": "Learn More",
+  "start_date": "Jun 25, 2026",
+  "primary_text_start": "Spot signals early with Hootsuite Social OS \u2014 and act while others are still deciding.",
+  "headline": "Real-Time Intelligence",
+  "note": "Video src/poster read directly from the rendered <video> element in the results list.",
+  "errors": []
+ },
+ "Spotify": {
+  "status": "skipped",
+  "note": "Official Spotify page shows 'No ads match your search criteria' with Active-ads filter. No active US ads."
+ },
+ "Sleeknote": {
+  "status": "skipped",
+  "note": "Official Sleeknote page shows no active US ads."
+ },
+ "Heap": {
+  "status": "skipped",
+  "note": "No confidently matchable official Heap page in Ad Library suggestions."
+ },
+ "Descript": {
+  "status": "skipped",
+  "note": "Official Descript page shows no active US ads."
+ },
+ "Replit": {
+  "status": "partial",
+  "note": "Video player failed to render; no media URLs captured."
+ },
+ "1215571320753449": {
+  "status": "ok",
+  "brand": "Search Atlas",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1215571320753449-img0.jpg",
+    "bytes": 40723
+   }
+  ],
+  "cta": "See details",
+  "start_date": "Aug 18, 2026",
+  "primary_text_start": "Cancel Ahrefs, Semrush, and save thousands of dollars a month! Search Atlas is the world's first AI-powered, all-in-one SEO suite",
+  "headline": "Cancel Ahrefs, Semrush and Save Thousands A Month",
+  "note": "Links to searchatlas.com/lp/try-now/.",
+  "errors": []
+ },
+ "Drift": {
+  "status": "skipped",
+  "note": "No confidently matchable official Drift page in Ad Library suggestions."
+ },
+ "Toggl": {
+  "status": "skipped",
+  "note": "Official Toggl page shows no active US ads."
+ }
+}
