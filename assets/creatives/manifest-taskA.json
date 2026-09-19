@@ -1,0 +1,347 @@
+{
+ "1598592228504757": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1598592228504757-img0.jpg",
+    "bytes": 43835
+   }
+  ],
+  "primary_text_start": "Notion has everything you need to unlock the power of AI at work.",
+  "headline": "Solve Work with Notion. The AI-enabled workspace designed for collaboration and productivity.",
+  "note": ""
+ },
+ "1795213771918713": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1795213771918713-img0.jpg",
+    "bytes": 43835
+   }
+  ],
+  "primary_text_start": "Notion has everything you need to unlock the power of AI at work.",
+  "headline": "Solve Work with Notion. The AI-enabled workspace designed for collaboration and productivity.",
+  "note": "Same creative image as 1598592228504757 (different _nc_gid/oh session params)."
+ },
+ "984083741332700": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/984083741332700-img0.jpg",
+    "bytes": 43500
+   }
+  ],
+  "primary_text_start": "Notion has everything you need to unlock the power of AI at work.",
+  "headline": "Solve Work with Notion. The AI-enabled workspace designed for collaboration and productivity.",
+  "note": "Same creative image as the other Notion ads.",
+  "errors": []
+ },
+ "1742121057047306": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1742121057047306-img0.jpg",
+    "bytes": 37945
+   }
+  ],
+  "primary_text_start": "ClickUp handles your tasks, docs, goals, and chat. No more switching between tools to get work done.",
+  "headline": "One app instead of ten",
+  "note": "ClickUp ad."
+ },
+ "1613464840126287": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1613464840126287-img0.jpg",
+    "bytes": 24140
+   }
+  ],
+  "primary_text_start": "Your work. One hub. Now with Chat. Tasks \u2705 Docs \u2705 Dashboards \u2705 Live Chat \u2705",
+  "headline": "No more app hopping.",
+  "note": "ClickUp ad. Page notes 'This ad has multiple versions' but only one image creative rendered in dialog."
+ },
+ "944810361436633": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/944810361436633-img0.jpg",
+    "bytes": 31634
+   }
+  ],
+  "primary_text_start": "Supercharge productivity. Streamline work by doing it, and seeing it, in one place.",
+  "headline": "Every app, AI agent, and human in one place.",
+  "note": "ClickUp ad.",
+  "errors": []
+ },
+ "1296097912528393": {
+  "status": "ok",
+  "format": "video",
+  "files": [
+   {
+    "file": "assets/creatives/1296097912528393-img0.jpg",
+    "bytes": 50313
+   },
+   {
+    "file": "assets/creatives/1296097912528393-img1.jpg",
+    "bytes": 61821
+   }
+  ],
+  "primary_text_start": "Why settle for Airtable? monday.com gives your team more power, flexibility, ",
+  "headline": "Upgrade from Airtable",
+  "note": "monday.com video ad. Video element never rendered in DOM (player error). Images are the two version thumbnails from Ad Details '1 of 2' strip (video poster images). No playable_url found in rendered DOM."
+ },
+ "1068553512562923": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1068553512562923-img0.jpg",
+    "bytes": 25991
+   }
+  ],
+  "primary_text_start": "Still relying on the person who built your Airtable base? Move to monday.com - easy enough for your whole team to use.",
+  "headline": "Easy to migrate. Easy to love.",
+  "note": "monday.com ad. Page notes 'This ad has multiple versions'."
+ },
+ "1613619663800137": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1613619663800137-img0.jpg",
+    "bytes": 40224
+   }
+  ],
+  "primary_text_start": "Using Airtable? See how it compares to monday.com. Move to monday.com - easy enough for your whole team to use.",
+  "headline": "See how it compares to monday.com",
+  "note": "monday.com ad. Page notes 'This ad has multiple versions'.",
+  "errors": []
+ },
+ "1661325281890506": {
+  "status": "failed",
+  "format": "video",
+  "files": [],
+  "primary_text_start": "Ready to see ROI on your Instagram posts? Get our free guide to Instagram for business.",
+  "headline": "Free Instagram Strategies",
+  "note": "HubSpot video ad. Video player shows 'Sorry, we're having trouble playing this video' and no <video> element ever appears in DOM (checked link-to-ad modal and Ad Details dialog across 3 loads). No poster/playable_url available in rendered DOM. Ad Details 'Additional assets' shows only text/link assets."
+ },
+ "1450316263433666": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1450316263433666-img0.jpg",
+    "bytes": 35498
+   }
+  ],
+  "primary_text_start": "Get free expert strategies for Instagram that drive serious results.",
+  "headline": "Free Instagram Guide",
+  "note": "HubSpot ad. Rendered as IMAGE creative (Library ID 1450316263433666 confirmed in dialog). An earlier load showed a video player error, so this ad may serve dynamic creative (image/video variants).",
+  "errors": []
+ },
+ "1657136262226198": {
+  "status": "ok",
+  "format": "video",
+  "files": [],
+  "primary_text_start": "Ready to make Instagram work for your business? Get the playbook that shows you how to build an audience \u2014 and keep them.",
+  "headline": "Instagram for Business",
+  "note": "HubSpot video ad. Video element never rendered (player error). Images are the 3 unique version thumbnails from Ad Details '1 of 5' strip. No playable_url in rendered DOM.",
+  "errors": [
+   "1657136262226198-img0.jpg: HTTPError HTTP Error 403: Forbidden",
+   "1657136262226198-img1.jpg: HTTPError HTTP Error 403: Forbidden",
+   "1657136262226198-img2.jpg: HTTPError HTTP Error 403: Forbidden"
+  ]
+ },
+ "1775391387204480": {
+  "status": "ok",
+  "format": "video",
+  "files": [
+   {
+    "file": "assets/creatives/1775391387204480.mp4",
+    "bytes": 307523
+   },
+   {
+    "file": "assets/creatives/1775391387204480-poster.jpg",
+    "bytes": 69475
+   }
+  ],
+  "primary_text_start": "Slice any flat image into a fully editable design with Canva Magic Layers",
+  "headline": "Try Canva Magic Layers",
+  "note": "Canva video ad. Full <video> element captured from DOM (poster + src). Page notes 'This ad has multiple versions'."
+ },
+ "1762128654775837": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1762128654775837-img0.jpg",
+    "bytes": 2761645
+   }
+  ],
+  "primary_text_start": "Canva AI can keep you on brand.",
+  "headline": "Try Canva On-Brand Design",
+  "note": "Canva image ad. Page notes 'This ad has multiple versions'; single image rendered."
+ },
+ "1604618234327263": {
+  "status": "ok",
+  "format": "video",
+  "files": [
+   {
+    "file": "assets/creatives/1604618234327263-img0.jpg",
+    "bytes": 50498
+   },
+   {
+    "file": "assets/creatives/1604618234327263-img1.jpg",
+    "bytes": 180646
+   }
+  ],
+  "primary_text_start": "Ask for a presentation and you shall receive.",
+  "headline": "Try Canva Presentations",
+  "note": "Canva video ad. Video element never rendered (player error). Images are the 2 unique version thumbnails from Ad Details '1 of 3' strip. Card notes '2 ads use this creative and text'.",
+  "errors": []
+ },
+ "1948048259175344": {
+  "status": "ok",
+  "format": "image",
+  "files": [],
+  "primary_text_start": "SEO isn't just about websites anymore \ud83d\udc40 AI now reads Reddit, LinkedIn, and reviews too.",
+  "headline": "AI reads beyond your website",
+  "note": "Semrush image ad.",
+  "errors": [
+   "1948048259175344-img0.jpg: HTTPError HTTP Error 403: Forbidden"
+  ]
+ },
+ "1248192233868613": {
+  "status": "ok",
+  "format": "video",
+  "files": [
+   {
+    "file": "assets/creatives/1248192233868613.mp4",
+    "bytes": 364767
+   },
+   {
+    "file": "assets/creatives/1248192233868613-poster.jpg",
+    "bytes": 12541
+   },
+   {
+    "file": "assets/creatives/1248192233868613-img0.jpg",
+    "bytes": 12541
+   },
+   {
+    "file": "assets/creatives/1248192233868613-img1.jpg",
+    "bytes": 16235
+   }
+  ],
+  "primary_text_start": "Discover if AI assistants mention your brand or skip you entirely \ud83d\udc40",
+  "headline": "Don\u2019t disappear in AI",
+  "note": "Semrush video ad. Full <video> element captured from Ad Details dialog DOM (poster + src). Second image is the other version thumbnail from '1 of 3' strip. Page notes 'This ad has multiple versions'.",
+  "errors": []
+ },
+ "1312698180459891": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1312698180459891-img0.jpg",
+    "bytes": 48904
+   }
+  ],
+  "primary_text_start": "AI isn't just reading your site. It's reading Reddit, G2, and every review ever written about you \ud83d\udc40",
+  "headline": "How AI finds your brand",
+  "note": "Semrush image ad.",
+  "errors": []
+ },
+ "1300045268337817": {
+  "status": "ok",
+  "format": "video",
+  "files": [
+   {
+    "file": "assets/creatives/1300045268337817.mp4",
+    "bytes": 453281
+   }
+  ],
+  "primary_text_start": "Comment \u201cnotes\u201d for free pass #adhd #university #college #notetaking",
+  "headline": "HyNote - AI Note Taker, Summary",
+  "note": "HyNote video ad. Full <video> element captured from link-to-ad modal DOM (poster + src).",
+  "errors": [
+   "1300045268337817-poster.jpg: HTTPError HTTP Error 403: Forbidden"
+  ]
+ },
+ "2280096272543022": {
+  "status": "ok",
+  "format": "video",
+  "files": [
+   {
+    "file": "assets/creatives/2280096272543022.mp4",
+    "bytes": 2854409
+   }
+  ],
+  "primary_text_start": "\u00bfPasas horas transcribiendo clases o tratando de ordenar tus apuntes para los ex\u00e1menes? \ud83e\udd2f\ud83d\udc47",
+  "headline": "ignacio.bigarot",
+  "note": "HyNote/HiNoter Spanish video ad (creator partnership with ignacio.bigarot). Full <video> element captured from modal DOM (poster + src). Headline shown is the linked Instagram profile name; link card points to ITUNES.APPLE.COM.",
+  "errors": [
+   "2280096272543022-poster.jpg: HTTPError HTTP Error 403: Forbidden"
+  ]
+ },
+ "1716022782933276": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1716022782933276-img0.jpg",
+    "bytes": 28971
+   }
+  ],
+  "primary_text_start": "Unlock Your Productivity with the Best AI Note Taking App \ud83e\udd29",
+  "headline": "AI Note Taker",
+  "note": "Wisp AI image ad (link card to APPS.APPLE.COM). Other Wisp AI ads on the page are video, but this ID rendered an image creative."
+ },
+ "939671522081903": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/939671522081903-img0.jpg",
+    "bytes": 46116
+   }
+  ],
+  "primary_text_start": "Professional business headshots, done for you in 2 hours or less.",
+  "headline": "Best AI Headshots \ud83c\udfc6",
+  "note": "HeadshotPro image ad.",
+  "errors": []
+ },
+ "1009861754734233": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1009861754734233-img0.jpg",
+    "bytes": 44051
+   }
+  ],
+  "primary_text_start": "AI Headshot Generator - Get Professional AI Headshots in Minutes.",
+  "headline": "Aragon.ai",
+  "note": "Aragon.ai page-like ad (Product/service, 'Like Page' CTA). Image creative shown above the page card.",
+  "errors": []
+ },
+ "1739596310818190": {
+  "status": "ok",
+  "format": "image",
+  "files": [
+   {
+    "file": "assets/creatives/1739596310818190-img0.jpg",
+    "bytes": 23175
+   }
+  ],
+  "primary_text_start": "Professional business headshots, done for you in 2 hours or less.",
+  "headline": "Try Now with your photos\ud83e\udd29 \ud83d\udc49",
+  "note": "Tap Mobile image ad (link to play.google.com). Page notes 'This ad has multiple versions'; single image rendered.",
+  "errors": []
+ }
+}
