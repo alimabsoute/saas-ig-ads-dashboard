@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06 — Typewolf · The SaaS Ad Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--paper:#F6F1E7;--ink:#14120E;--green:#2E5C4A;--grey:#6f6a5e;--ease:cubic-bezier(.22,1,.36,1)}
+body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.kicker{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+a.back{position:fixed;top:18px;left:20px;z-index:60;font-size:12px;color:var(--ink);text-decoration:none;font-family:"IBM Plex Mono",monospace;letter-spacing:.08em}
+nav{max-width:1200px;margin:0 auto;padding:28px 32px;display:flex;justify-content:space-between;align-items:baseline}
+nav .word{font-family:Fraunces,serif;font-size:22px;font-weight:600}
+nav .items{display:flex;gap:30px}
+nav .items a{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);text-decoration:none;opacity:.7;transition:opacity .25s}
+nav .items a:hover{opacity:1}
+.hero{max-width:1200px;margin:0 auto;padding:110px 32px 90px}
+.hero .kicker{margin-bottom:28px;display:block}
+.hero h1{font-family:Fraunces,serif;font-weight:480;font-size:clamp(3.2rem,9vw,8.2rem);line-height:1.0;letter-spacing:-.015em;max-width:12ch}
+.hero h1 em{font-style:italic;color:var(--green)}
+.hero .lede{margin-top:36px;max-width:36em;font-size:18px;line-height:1.65;color:#3a352b}
+.stats{display:flex;gap:56px;margin-top:56px;flex-wrap:wrap}
+.stats div .n{font-family:Fraunces,serif;font-size:44px}
+.stats div .kicker{font-size:11px;margin-top:6px;display:block}
+.rule{max-width:1200px;margin:0 auto;padding:0 32px}
+.rule hr{border:none;border-top:1px solid #d9d2c2}
+main{max-width:1200px;margin:0 auto;padding:90px 32px}
+.sec-head{margin-bottom:48px}
+.sec-head h2{font-family:Fraunces,serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:500;letter-spacing:-.01em;margin-top:14px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:56px}
+.filters button{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:none;border:1px solid #cfc7b4;border-radius:100px;padding:9px 18px;cursor:pointer;color:var(--ink);transition:all .25s}
+.filters button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.specimen{border-top:1px solid #d9d2c2;padding:44px 0;display:grid;grid-template-columns:200px 1fr;gap:40px}
+.specimen:last-child{border-bottom:1px solid #d9d2c2}
+.specimen .meta .kicker{font-size:11px;display:block;margin-bottom:10px}
+.specimen .meta .run{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--grey);line-height:1.7}
+.specimen h3{font-family:Fraunces,serif;font-size:clamp(1.7rem,3.4vw,2.6rem);font-weight:500;line-height:1.1;letter-spacing:-.01em;margin-bottom:14px}
+.specimen h3 .brand{font-style:italic;color:var(--green)}
+.specimen p{max-width:34em;font-size:16.5px;line-height:1.65;color:#3a352b}
+.specimen .cta-row{margin-top:18px;display:flex;gap:20px;align-items:center}
+.specimen .cta{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.patterns{background:var(--ink);color:var(--paper);margin-top:110px}
+.patterns .inner{max-width:1200px;margin:0 auto;padding:100px 32px}
+.patterns .kicker{color:#9fc3ae}
+.patterns h2{font-family:Fraunces,serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:500;margin:14px 0 56px;letter-spacing:-.01em}
+.pat{display:grid;grid-template-columns:90px 1fr 1fr;gap:32px;padding:36px 0;border-top:1px solid rgba(246,241,231,.18)}
+.pat .n{font-family:"IBM Plex Mono",monospace;font-size:12px;color:#9fc3ae;letter-spacing:.1em}
+.pat h3{font-family:Fraunces,serif;font-size:24px;font-weight:500;margin-bottom:10px}
+.pat p{font-size:15.5px;line-height:1.65;color:rgba(246,241,231,.75);max-width:34em}
+footer{max-width:1200px;margin:0 auto;padding:48px 32px;display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--grey)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media(max-width:760px){.specimen{grid-template-columns:1fr;gap:16px}.pat{grid-template-columns:1fr;gap:10px}}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← INDEX</a>
+<nav><div class="word">Ad Library <span style="font-weight:300">· 06</span></div><div class="items"><a href="#library">Library</a><a href="#patterns">Patterns</a><a href="index.html">Index</a></div></nav>
+
+<header class="hero">
+  <span class="kicker">Direction 06 — Typewolf · Fraunces + Inter + Plex Mono</span>
+  <h1>Set in type,<br><em>read</em> like a specimen.</h1>
+  <p class="lede">Sixty-one SaaS ads — forty-six paid, fifteen organic — presented the way Typewolf presents fonts: one display face doing the talking, one neutral body face, and mono for the metadata. The letterforms carry the page.</p>
+  <div class="stats">
+    <div><div class="n">61</div><span class="kicker">Entries</span></div>
+    <div><div class="n">46</div><span class="kicker">Paid · Meta Library</span></div>
+    <div><div class="n">15</div><span class="kicker">Organic · Instagram</span></div>
+    <div><div class="n">203</div><span class="kicker">Days, longest run</span></div>
+  </div>
+</header>
+
+<div class="rule"><hr></div>
+
+<main id="library">
+  <div class="sec-head rv"><span class="kicker">The Library</span><h2>Eight specimens, verbatim.</h2></div>
+  <div class="filters rv" id="filters">
+    <button class="on" data-f="all">All</button><button data-f="paid">Paid</button><button data-f="organic">Organic</button>
+    <button data-f="AI tools">AI tools</button><button data-f="marketing">Marketing</button><button data-f="productivity">Productivity</button><button data-f="design">Design</button>
+  </div>
+  <div id="specimens"></div>
+</main>
+
+<section class="patterns" id="patterns"><div class="inner">
+  <span class="kicker">The Playbook</span>
+  <h2>Four findings, plainly stated.</h2>
+  <div class="pat rv"><span class="n">№ 01</span><h3>Run-time is the metric.</h3><p>HeadshotPro has run one ad since February 27, 2026. Meta publishes no CTR — but no one funds a loser for 203 days.</p></div>
+  <div class="pat rv"><span class="n">№ 02</span><h3>Specificity over adjectives.</h3><p>“100% online. No appointments. 2 hours or less.” A checklist of promises, each deleting one objection.</p></div>
+  <div class="pat rv"><span class="n">№ 03</span><h3>Name the alternative.</h3><p>Monday.com buys Airtable's users by name. ClickUp: “One app instead of ten.” A rival sharpens the message.</p></div>
+  <div class="pat rv"><span class="n">№ 04</span><h3>Teach, then sell.</h3><p>HubSpot's free Instagram guide has run since March. The offer is the advertisement.</p></div>
+</div></section>
+
+<footer><span>DIRECTION 06 — TYPEWOLF</span><span>RESEARCH · SEP 18 2026</span></footer>
+
+<script>
+const ADS=[
+{b:"HeadshotPro",t:"paid",c:"AI tools",h:"Best AI Headshots",x:"Professional business headshots, done for you in 2 hours or less. 100% online, no appointments — full refund if you don't get an incredible headshot.",cta:"Learn more",r:"RUNNING SINCE<br>FEB 27, 2026"},
+{b:"HubSpot",t:"paid",c:"marketing",h:"Free Instagram Strategies",x:"Ready to see ROI on your Instagram posts? Get our free guide to Instagram for business.",cta:"Get offer",r:"RUNNING SINCE<br>MAR 24, 2026"},
+{b:"Notion",t:"paid",c:"productivity",h:"Solve Work with Notion",x:"Create Custom AI Agents to automate your work — from weekly reports to ticket triage — running on triggers you set, using the context already in your workspace.",cta:"Sign up",r:"RUNNING SINCE<br>AUG 05, 2026"},
+{b:"Semrush",t:"paid",c:"marketing",h:"Don't disappear in AI",x:"SEO isn't just about websites anymore. AI now reads Reddit, LinkedIn, and reviews too.",cta:"Learn more",r:"RUNNING SINCE<br>JUN 05, 2026"},
+{b:"Canva",t:"paid",c:"design",h:"Try Canva Magic Layers",x:"Slice any flat image into a fully editable design with Canva Magic Layers.",cta:"Learn more",r:"RUNNING SINCE<br>JUN 05, 2026"},
+{b:"ClickUp",t:"paid",c:"productivity",h:"One app instead of ten",x:"ClickUp handles your tasks, docs, goals, and chat. No more switching between tools to get work done.",cta:"Sign up",r:"RUNNING SINCE<br>SEP 17, 2026"},
+{b:"Monday.com",t:"paid",c:"productivity",h:"Upgrade from Airtable",x:"Why settle for Airtable? monday.com gives your team more power, flexibility, and speed. Try it free.",cta:"Sign up",r:"RUNNING SINCE<br>SEP 07, 2026"},
+{b:"Duolingo",t:"organic",c:"marketing",h:"The unhinged owl",x:"Mascot-led chaos content — the owl threatens, begs, and roasts followers into doing their lessons. February 2025's mascot-death stunt broke the internet.",cta:"Follow",r:"ORGANIC<br>INSTAGRAM"}
+];
+const box=document.getElementById('specimens');
+ADS.forEach(a=>{
+  const d=document.createElement('div');d.className='specimen rv';d.dataset.t=a.t;d.dataset.c=a.c;
+  d.innerHTML=`<div class="meta"><span class="kicker">${a.t} · ${a.c}</span><div class="run">${a.r}</div></div><div><h3><span class="brand">${a.b}</span> — “${a.h}”</h3><p>${a.x}</p><div class="cta-row"><span class="cta">${a.cta} →</span></div></div>`;
+  box.appendChild(d);
+});
+document.getElementById('filters').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('on'));
+  e.target.classList.add('on');const f=e.target.dataset.f;
+  document.querySelectorAll('.specimen').forEach(c=>{c.style.display=(f==='all'||c.dataset.t===f||c.dataset.c===f)?'grid':'none'});
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
