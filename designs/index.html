@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Directions — pick one</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Inter:wght@300..800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;600&family=Anton&family=Sora:wght@400;700;800&family=Space+Grotesk:wght@400;600;700&family=Bodoni+Moda:opsz,wght@6..96,400..800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0B0B0D;--surface:#131316;--ink:#F5F5F7;--mut:#A9A9A9;--line:rgba(255,255,255,.08)}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding:64px 24px 96px}
+.kicker{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);margin-bottom:20px}
+h1{font-size:clamp(2.4rem,6vw,4.6rem);font-weight:650;letter-spacing:-.03em;line-height:1.02;margin-bottom:14px}
+.sub{color:var(--mut);font-size:17px;max-width:640px;line-height:1.55;margin-bottom:56px}
+.sub b{color:var(--ink);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.22,1,.36,1),border-color .3s}
+.tile:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.22)}
+.preview{height:190px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.num{position:absolute;top:14px;left:16px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;opacity:.55}
+.body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:12px;flex:1}
+.body h2{font-size:19px;letter-spacing:-.01em}
+.body ul{list-style:none;display:flex;flex-direction:column;gap:7px;color:var(--mut);font-size:13.5px;line-height:1.45}
+.body ul li::before{content:"— ";opacity:.6}
+.pick{margin-top:auto;padding-top:8px}
+.pick a{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;border:1px solid var(--line);padding:10px 18px;border-radius:100px;transition:background .25s,color .25s}
+.pick a:hover{background:var(--ink);color:#0B0B0D}
+.foot{margin-top:72px;color:var(--mut);font-size:13px;font-family:"IBM Plex Mono",monospace;letter-spacing:.06em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">SaaS IG Ads Dashboard · Redesign</div>
+  <h1>Design Directions —<br>pick one.</h1>
+  <p class="sub">10 distinct visual systems for the <b>61-entry SaaS ad library</b> (46 paid ads, 15 organic posts), each drawn from a different design gallery's research. Click through, feel them, tell me which number wins.</p>
+  <div class="grid">
+
+    <div class="tile">
+      <div class="preview" style="background:#efefef"><span class="num" style="color:#0f1012">01</span>
+        <span style="font-family:Inter;font-weight:300;font-size:44px;letter-spacing:-.05em;color:#0f1012">Ad Library<span style="color:#0071e3">.</span></span></div>
+      <div class="body"><h2>Godly — Fluid Display</h2>
+        <ul><li>9.72vw oversized light display type, hairlines not shadows</li><li>Glass floating pill nav, 3D-flip blur scroll reveals</li><li>Odometer stat counters, neutral base + one blue accent</li></ul>
+        <div class="pick"><a href="godly.html">Open direction 01 →</a></div></div>
+    </div>
+
+    <div class="tile">
+      <div class="preview" style="background:#FFFCF8"><span class="num" style="color:#17171C">02</span>
+        <span style="font-family:'Source Serif 4',serif;font-size:40px;color:#17171C">The <em>Library</em>,</span></div>
+      <div class="body"><h2>SiteInspire — Quiet Luxury</h2>
+        <ul><li>Warm ivory canvas, serif display + grotesque UI, frosted-glass header</li><li>Per-letter staggered headline reveals, borderless editorial rows</li><li>Per-category accent theming, numbered ledgers as design</li></ul>
+        <div class="pick"><a href="siteinspire.html">Open direction 02 →</a></div></div>
+    </div>
+
+    <div class="tile">
+      <div class="preview" style="background:#fff"><span class="num" style="color:#111">03</span>
+        <span style="font-family:Inter;font-weight:500;font-size:30px;letter-spacing:-.02em;color:#111">Every winning ad.</span>
+        <span style="background:#111;color:#fff;font-family:Inter;font-size:13px;padding:8px 18px;border-radius:8px;position:absolute;bottom:26px">Browse the ads</span></div>
+      <div class="body"><h2>One Page Love — Product Demo</h2>
+        <ul><li>Hero mockup that behaves like the product: animated cursor, rolling digits</li><li>Inter + mono, one black pill CTA repeated everywhere</li><li>Tactile buttons, plain-spoken verb-first microcopy</li></ul>
+        <div class="pick"><a href="one-page-love.html">Open direction 03 →</a></div></div>
+    </div>
+
+    <div class="tile">
+      <div class="preview" style="background:#0E1230"><span class="num" style="color:#fff">04</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 40px;width:100%">
+          <div style="background:#6C3BFF;border-radius:12px;height:56px"></div>
+          <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;height:56px"></div>
+          <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;height:56px"></div>
+          <div style="background:#D8FF3E;border-radius:12px;height:56px"></div>
+        </div></div>
+      <div class="body"><h2>Land Book — Bento Landing</h2>
+        <ul><li>Deep-navy premium landing with a bento feature grid</li><li>Brand marquee wall, sticky CTA bar, testimonial strip</li><li>Space Grotesk display, one violet accent + lime highlights</li></ul>
+        <div class="pick"><a href="land-book.html">Open direction 04 →</a></div></div>
+    </div>
+
+    <div class="tile">
+      <div class="preview" style="background:#F4F0E8;overflow:hidden"><span class="num" style="color:#0A0A0A">05</span>
+        <span style="font-family:'Bodoni Moda',serif;font-size:64px;letter-spacing:.02em;color:transparent;-webkit-text-stroke:1.5px #0A0A0A;white-space:nowrap">AD LIBRARY</span></div>
+      <div class="body"><h2>Httpster — Type as Hero</h2>
+        <ul><li>21vw display type cropped by the viewport edge, outline vs solid</li><li>Tracked-out 0.3em labels, sticky side-rail index, 1px hairline rules</li><li>Cream ground + black ink + one burnt-orange accent, never gradients</li></ul>
+        <div class="pick"><a href="httpster.html">Open direction 05 →</a></div></div>
+    </div>
+
+    <div class="tile">
+      <div class="preview" style="background:#F6F1E7"><span class="num" style="color:#14120E">06</span>
+        <span style="font-family:Fraunces,serif;font-weight:500;font-size:42px;color:#14120E">The Ad Library</span></div>
+      <div class="body"><h2>Typewolf — Editorial Type</h2>
+        <ul><li>Fraunces display + Inter body + IBM Plex Mono metadata accents</li><li>Letter-spaced caps kickers everywhere — the cheapest premium signal</li><li>Muted paper ground, deep-green accent, strict role separation</li></ul>
+        <div class="pick"><a href="typewolf.html">Open direction 06 →</a></div></div>
+    </div>
+
+    <div class="tile" style="border-color:rgba(218,250,156,.25)">
+      <div class="preview" style="background:#000"><span class="num" style="color:#DAFA9C">[07]</span>
+        <span style="font-family:Anton,sans-serif;font-size:52px;color:#fff;letter-spacing:.01em">AD<span style="color:#DAFA9C">[</span>LIB<span style="color:#DAFA9C">]</span></span></div>
+      <div class="body"><h2>MaxiBestOf — Brutalist Terminal</h2>
+        <ul><li>Near-black ground, one neon-lime accent at &lt;2% of pixels</li><li>Bracketed index metadata [01], percentage preloader, marquee strips</li><li>File-labeled panels (ADS.SYS), monospace as the interface voice</li></ul>
+        <div class="pick"><a href="maxibestof.html">Open direction 07 →</a></div></div>
+    </div>
+
+    <div class="tile">
+      <div class="preview" style="background:#FBF7EF"><span class="num" style="color:#191919">08</span>
+        <span style="font-family:Sora,sans-serif;font-weight:800;font-size:34px;color:#191919">Ads, but <span style="background:#FFC531;padding:2px 10px;border-radius:100px">fun</span>.</span></div>
+      <div class="body"><h2>Lapa Ninja — Playful SaaS</h2>
+        <ul><li>Friendly two-tone system: violet + yellow on warm cream</li><li>Rounded cards, floating sticker badges, tabbed feature sections</li><li>Sora display, approachable without looking cheap</li></ul>
+        <div class="pick"><a href="lapa-ninja.html">Open direction 08 →</a></div></div>
+    </div>
+
+    <div class="tile">
+      <div class="preview" style="background:#000"><span class="num" style="color:#fff">09</span>
+        <span style="font-family:Inter;font-weight:400;font-size:26px;color:#fff;letter-spacing:-.02em;border-top:1px solid rgba(255,255,255,.15);border-bottom:1px solid rgba(255,255,255,.15);padding:14px 0">Sixty-one ads.</span></div>
+      <div class="body"><h2>Minimal Gallery — Pure Restraint</h2>
+        <ul><li>One typeface, one weight — hierarchy from size + tracking only</li><li>Pure black, 0.5px hairline dividers, whitespace as the design</li><li>One signature interaction: hover-dimming index + exclusion captions</li></ul>
+        <div class="pick"><a href="minimal-gallery.html">Open direction 09 →</a></div></div>
+    </div>
+
+    <div class="tile">
+      <div class="preview" style="background:#fff"><span class="num" style="color:#111">10</span>
+        <span style="font-family:'Space Mono',monospace;font-size:20px;color:#111;border-bottom:2px dotted #f25c1a;padding-bottom:6px">hover → scatter</span></div>
+      <div class="body"><h2>Hoverstat — Interaction Playground</h2>
+        <ul><li>Hover an index row → that ad's previews scatter to viewport edges</li><li>Mono uppercase labels, dotted leaders, orange accent on white</li><li>Scroll-stretch type, split flanking captions, fuzzy-type footer</li></ul>
+        <div class="pick"><a href="hoverstat.html">Open direction 10 →</a></div></div>
+    </div>
+
+  </div>
+  <div class="foot">RESEARCH → 10 DIRECTIONS → 1 WINNER &nbsp;·&nbsp; REPLY WITH A NUMBER</div>
+</div>
+</body>
+</html>
