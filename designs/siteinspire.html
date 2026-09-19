@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>02 — SiteInspire · The SaaS Ad Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--paper:#FFFCF8;--ink:#17171C;--grey:#777576;--sage:#ECF0EB;--accent:#B98A2F;--ease:cubic-bezier(.19,1,.22,1)}
+body{background:var(--paper);color:var(--ink);font-family:Inter,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased}
+a.back{position:fixed;top:20px;left:22px;z-index:60;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;opacity:.55}
+header.glass{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:0 40px;height:64px;background:rgba(255,252,248,.55);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+header.glass .brand{font-family:"Source Serif 4",serif;font-size:19px}
+header.glass nav{display:flex;gap:28px}
+header.glass nav a{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none;position:relative;opacity:.75}
+header.glass nav a::after{content:"";position:absolute;left:0;bottom:-4px;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:0;transition:opacity .3s}
+header.glass nav a:hover::after{opacity:1}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 24px 80px}
+.hero .kick{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--grey);margin-bottom:32px}
+.hero h1{font-family:"Source Serif 4",serif;font-weight:400;font-size:clamp(3rem,8.5vw,7.5rem);line-height:1.02;max-width:14ch}
+.hero h1 em{font-style:italic}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
+.hero h1 .w>span{display:inline-block;transform:translateY(110%);animation:rise 1s var(--ease) forwards}
+@keyframes rise{to{transform:none}}
+.hero .lede{margin-top:36px;font-size:16px;color:var(--grey);max-width:44ch;line-height:1.7}
+.hero .cta{margin-top:44px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:underline;text-underline-offset:6px}
+.nums{display:flex;gap:0;justify-content:center;border-top:1px solid #e5e0d8;border-bottom:1px solid #e5e0d8;max-width:1100px;margin:0 auto}
+.nums div{flex:1;text-align:center;padding:44px 16px}
+.nums div+div{border-left:1px solid #e5e0d8}
+.nums .n{font-family:"Source Serif 4",serif;font-size:52px}
+.nums .l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);margin-top:8px}
+main{max-width:1100px;margin:0 auto;padding:140px 24px}
+.sec-kick{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--grey);margin-bottom:56px}
+.row{display:grid;grid-template-columns:70px 1fr 1.4fr;gap:32px;padding:44px 0;border-top:1px solid #e5e0d8;align-items:start}
+.row:last-child{border-bottom:1px solid #e5e0d8}
+.row .idx{font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:600;transition:color .5s}
+.row .brand{font-family:"Source Serif 4",serif;font-size:30px;line-height:1.1}
+.row .brand small{display:block;font-family:Inter;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);margin-top:10px}
+.row .body h3{font-size:17px;font-weight:600;margin-bottom:10px}
+.row .body p{font-size:14.5px;line-height:1.7;color:#3c3a38;max-width:52ch}
+.row .body .run{margin-top:14px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey)}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.filters button{font-family:inherit;font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:none;border:1px solid #d8d2c6;border-radius:100px;padding:10px 20px;cursor:pointer;color:var(--ink);transition:all .3s}
+.filters button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:80px;padding:140px 24px;max-width:1100px;margin:0 auto;align-items:center}
+.split h2{font-family:"Source Serif 4",serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:400;line-height:1.08;margin-bottom:24px}
+.split p{font-size:15px;line-height:1.75;color:#3c3a38;max-width:40ch}
+.pat-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid #e5e0d8}
+.pat{padding:56px 48px;border-bottom:1px solid #e5e0d8}
+.pat:nth-child(odd){border-right:1px solid #e5e0d8}
+.pat .n{font-family:"Source Serif 4",serif;font-style:italic;font-size:15px;color:var(--accent);margin-bottom:18px}
+.pat h3{font-family:"Source Serif 4",serif;font-size:26px;font-weight:400;margin-bottom:14px}
+.pat p{font-size:14.5px;line-height:1.7;color:#3c3a38}
+footer{padding:80px 40px 48px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey)}
+.rv{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media(max-width:800px){.row{grid-template-columns:1fr;gap:12px}.split,.pat-grid{grid-template-columns:1fr}.pat:nth-child(odd){border-right:none}}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← Index</a>
+<header class="glass"><div class="brand">Ad Library <em style="font-style:italic">·</em> 02</div><nav><a href="#library">Library</a><a href="#patterns">Patterns</a><a href="index.html">Index</a></nav></header>
+
+<section class="hero">
+  <div class="kick">Direction 02 — SiteInspire · Quiet Luxury</div>
+  <h1 id="heroh1">The SaaS <em>Ad Library</em>, composed.</h1>
+  <p class="lede">Sixty-one entries — forty-six paid, fifteen organic — set with restraint. Warm paper, near-black ink, and one accent per category. Nothing shouts.</p>
+  <a class="cta" href="#library">Enter the library</a>
+</section>
+
+<div class="nums rv">
+  <div><div class="n">61</div><div class="l">Entries</div></div>
+  <div><div class="n">46</div><div class="l">Paid ads</div></div>
+  <div><div class="n">15</div><div class="l">Organic posts</div></div>
+</div>
+
+<main id="library">
+  <div class="sec-kick rv">The Library — a numbered ledger</div>
+  <div class="filters rv" id="filters">
+    <button class="on" data-f="all">All</button><button data-f="paid">Paid</button><button data-f="organic">Organic</button>
+    <button data-f="AI tools">AI tools</button><button data-f="marketing">Marketing</button><button data-f="productivity">Productivity</button><button data-f="design">Design</button>
+  </div>
+  <div id="rows"></div>
+</main>
+
+<section class="split" id="patterns">
+  <div class="rv"><h2>What the winners share, in four movements.</h2><p>Drawn from verbatim Meta Ad Library copy, recorded September 18, 2026. Longevity is the only public performance signal — everything else is craft you can see.</p></div>
+  <div class="pat-grid rv">
+    <div class="pat"><div class="n">No. 1</div><h3>Staying power</h3><p>HeadshotPro's ad has run since February 27, 2026. HubSpot's since March 24. Advertisers keep spending on what works.</p></div>
+    <div class="pat"><div class="n">No. 2</div><h3>Checklist candor</h3><p>“100% Online. No appointments. 2 hours or less.” Specific promises, ticked off — no adjectives required.</p></div>
+    <div class="pat"><div class="n">No. 3</div><h3>A named rival</h3><p>Monday.com buys conquest ads against Airtable. ClickUp: “One app instead of ten.” Politeness doesn't convert.</p></div>
+    <div class="pat"><div class="n">No. 4</div><h3>The free guide</h3><p>HubSpot's Instagram playbook has run for six months. Teach generously; the platform sells itself.</p></div>
+  </div>
+</section>
+
+<footer><span>Direction 02 — SiteInspire</span><span>Research · Sep 18 2026</span></footer>
+
+<script>
+const ACCENTS={"AI tools":"#2E6B4F","marketing":"#B98A2F","productivity":"#3B5BDB","design":"#C2452D"};
+const ADS=[
+{b:"HeadshotPro",t:"paid",c:"AI tools",h:"Best AI Headshots",x:"Professional business headshots, done for you in 2 hours or less. 100% online, no appointments — full refund if you don't get an incredible headshot.",r:"Running since Feb 27, 2026 · the longest active run found"},
+{b:"HyNote",t:"paid",c:"AI tools",h:"AI Note Taker",x:"Comment “notes” for a free pass. The student-audience ad that turned hashtags into a distribution channel: #adhd #university #notetaking.",r:"Running since May 26, 2026"},
+{b:"HubSpot",t:"paid",c:"marketing",h:"Free Instagram Strategies",x:"Ready to see ROI on your Instagram posts? Get our free guide to Instagram for business.",r:"Running since Mar 24, 2026 · video + image pair"},
+{b:"Semrush",t:"paid",c:"marketing",h:"Don't disappear in AI",x:"SEO isn't just about websites anymore. AI now reads Reddit, LinkedIn, and reviews too.",r:"Running since Jun 5, 2026"},
+{b:"Notion",t:"paid",c:"productivity",h:"Solve Work with Notion",x:"Create Custom AI Agents to automate your work — from weekly reports to ticket triage — running on triggers you set.",r:"Running since Aug 5, 2026"},
+{b:"ClickUp",t:"paid",c:"productivity",h:"One app instead of ten",x:"Tasks, docs, goals, and chat. No more switching between tools to get work done.",r:"Running since Sep 17, 2026"},
+{b:"Monday.com",t:"paid",c:"productivity",h:"Upgrade from Airtable",x:"Why settle for Airtable? More power, flexibility, and speed. Try it free.",r:"Running since Sep 7, 2026 · conquest creative"},
+{b:"Canva",t:"paid",c:"design",h:"Try Canva Magic Layers",x:"Slice any flat image into a fully editable design with Canva Magic Layers.",r:"Running since Jun 5, 2026"},
+{b:"Duolingo",t:"organic",c:"marketing",h:"The unhinged owl",x:"Mascot-led chaos — the owl threatens, begs, and roasts followers into doing their lessons. The Feb 2025 mascot-death stunt broke the internet.",r:"Organic · community-led"},
+{b:"Semrush",t:"organic",c:"marketing",h:"Trend-jacking, done right",x:"Squid Game, Spotify Wrapped, Inside Out 2 — cultural moments rewritten as SEO pain points, in meme format.",r:"Organic · meme-format"}
+];
+const box=document.getElementById('rows');
+ADS.forEach((a,i)=>{
+  const d=document.createElement('div');
+  d.className='row rv';d.dataset.t=a.t;d.dataset.c=a.c;d.dataset.accent=ACCENTS[a.c]||'#B98A2F';
+  d.innerHTML=`<div class="idx">${String(i+1).padStart(2,'0')}</div><div class="brand">${a.b}<small>${a.t} · ${a.c} · ${a.t==='paid'?'Meta Ad Library':'Instagram'}</small></div><div class="body"><h3>${a.h}</h3><p>${a.x}</p><div class="run">${a.r}</div></div>`;
+  box.appendChild(d);
+});
+// per-letter hero reveal
+const h1=document.getElementById('heroh1');
+(function(){
+  const html=h1.innerHTML;h1.innerHTML='';
+  let d=0;
+  html.split(/(<em>|<\/em>)/).forEach(part=>{
+    if(part==='<em>'||part==='</em>'){const e=document.createElement('em');e.className='w';h1.appendChild(e);return;}
+    part.split(' ').forEach((w,wi,arr)=>{
+      if(!w)return;
+      const wrap=document.createElement('span');wrap.className='w';
+      const inner=document.createElement('span');inner.style.animationDelay=(d*45)+'ms';inner.textContent=w;
+      wrap.appendChild(inner);h1.appendChild(wrap);d++;
+      if(wi<arr.length-1)h1.appendChild(document.createTextNode(' '));
+    });
+  });
+})();
+// per-section accent theming
+const io2=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting)document.documentElement.style.setProperty('--accent',e.target.dataset.accent);
+}),{threshold:.4});
+document.querySelectorAll('.row').forEach(r=>io2.observe(r));
+document.getElementById('filters').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('on'));
+  e.target.classList.add('on');const f=e.target.dataset.f;
+  document.querySelectorAll('.row').forEach(c=>{c.style.display=(f==='all'||c.dataset.t===f||c.dataset.c===f)?'grid':'none'});
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
