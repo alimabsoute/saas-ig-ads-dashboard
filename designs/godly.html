@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>01 — Godly · The SaaS Ad Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--blue:#0071e3;--ink:#0f1012;--bg:#efefef;--bg2:#f8f8f8;--ease:cubic-bezier(.77,0,.175,1)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;letter-spacing:-.02em;-webkit-font-smoothing:antialiased;font-weight:400}
+a.back{position:fixed;top:18px;left:18px;z-index:60;font-size:12px;color:var(--ink);text-decoration:none;opacity:.6}
+nav.pill{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:4px;align-items:center;background:hsla(0,0%,47%,.1);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:1rem;padding:8px 10px}
+nav.pill a{font-size:14px;font-weight:500;color:var(--ink);text-decoration:none;padding:8px 16px;border-radius:.7rem;transition:opacity .25s}
+nav.pill:hover a{opacity:.3}
+nav.pill a:hover{opacity:1!important}
+.hero{min-height:96vh;display:flex;flex-direction:column;justify-content:center;padding:0 4.8vw;position:relative;overflow:hidden}
+.eyebrow{font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:24px}
+.hero h1{font-size:clamp(3rem,9.72vw,9.72vw);font-weight:300;letter-spacing:-.04em;line-height:.95}
+.hero h1 b{font-weight:600}
+.hero p{font-size:clamp(16px,1.4vw,20px);color:#3a3c3e;max-width:52ch;line-height:1.5;margin-top:28px;font-weight:400;letter-spacing:-.015em}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(0,0,0,.1);margin-top:64px;padding-top:32px;max-width:1100px}
+.stat{padding:0 32px 0 0}
+.stat .n{font-size:clamp(2.6rem,5vw,4.4rem);font-weight:300;letter-spacing:-.04em;font-variant-numeric:tabular-nums;display:inline-block}
+.stat .l{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#6a6c6e;margin-top:6px}
+section{padding:15vw 4.8vw}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:48px}
+.sec-head h2{font-size:clamp(2rem,4.5vw,3.6rem);font-weight:400;letter-spacing:-.035em}
+.sec-head span{font-size:13px;color:#6a6c6e}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.filters button{font-family:inherit;font-size:13px;font-weight:500;letter-spacing:-.01em;padding:10px 20px;border-radius:5.4rem;border:.72px solid var(--blue);background:transparent;color:var(--blue);cursor:pointer;position:relative;overflow:hidden;transition:color .3s}
+.filters button.on,.filters button:hover{background:var(--blue);color:#fff}
+.grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:2.398vw}
+.card{background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.05);border-radius:24px;padding:26px;min-height:300px;display:flex;flex-direction:column;gap:14px;transition:transform .5s var(--ease)}
+.card:hover{transform:translateY(-6px)}
+.card .meta{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.card h3{font-size:21px;font-weight:600;letter-spacing:-.025em;line-height:1.15}
+.card .copy{font-size:14px;line-height:1.55;color:#3a3c3e;letter-spacing:-.01em}
+.card .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#6a6c6e}
+.card .cta{font-size:12px;font-weight:600;color:var(--blue)}
+.patterns{background:var(--ink);color:var(--bg);border-radius:32px;margin:0 24px;padding:100px 48px}
+.patterns .eyebrow{color:#8ab8ff}
+.patterns h2{font-size:clamp(2rem,4.5vw,3.6rem);font-weight:300;letter-spacing:-.035em;margin-bottom:48px}
+.pat-row{display:grid;grid-template-columns:80px 1fr 2fr;gap:24px;padding:32px 0;border-top:1px solid rgba(255,255,255,.12);align-items:baseline}
+.pat-row .no{font-size:13px;color:#8ab8ff;font-variant-numeric:tabular-nums}
+.pat-row h3{font-size:20px;font-weight:500;letter-spacing:-.02em}
+.pat-row p{font-size:15px;color:#b9bcc0;line-height:1.6;letter-spacing:-.01em}
+footer{padding:80px 4.8vw 40px;display:flex;justify-content:space-between;font-size:13px;color:#6a6c6e}
+.reveal{opacity:0;transform:translateY(50%) rotateX(-12deg);filter:blur(12px);transition:opacity .79s var(--ease),transform .79s var(--ease),filter .79s var(--ease)}
+.reveal.in{opacity:1;transform:none;filter:blur(0)}
+@media(max-width:900px){.grid5{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr;gap:24px}}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← all directions</a>
+<nav class="pill"><a href="#library">Library</a><a href="#patterns">Patterns</a><a href="index.html">01 / Godly</a></nav>
+
+<header class="hero">
+  <div class="eyebrow">Direction 01 — Godly · recent.design</div>
+  <h1>The SaaS<br><b>Ad Library</b>,<br>redesigned.</h1>
+  <p>61 entries. 46 paid ads with verbatim copy and verified run dates. 15 organic posts. One system: oversized fluid type, glass chrome, hairlines instead of shadows.</p>
+  <div class="stats">
+    <div class="stat"><span class="n" data-count="61">0</span><div class="l">Total entries</div></div>
+    <div class="stat"><span class="n" data-count="46">0</span><div class="l">Paid ads tracked</div></div>
+    <div class="stat"><span class="n" data-count="15">0</span><div class="l">Organic posts</div></div>
+  </div>
+</header>
+
+<section id="library">
+  <div class="sec-head reveal"><h2>The library</h2><span>8 of 61 shown · filter to slice</span></div>
+  <div class="filters reveal" id="filters">
+    <button class="on" data-f="all">All</button>
+    <button data-f="paid">Paid</button>
+    <button data-f="organic">Organic</button>
+    <button data-f="AI tools">AI tools</button>
+    <button data-f="marketing">Marketing</button>
+    <button data-f="productivity">Productivity</button>
+    <button data-f="design">Design</button>
+  </div>
+  <div class="grid5" id="cards"></div>
+</section>
+
+<div class="patterns" id="patterns">
+  <div class="eyebrow">The playbook</div>
+  <h2>What the winners have in common.</h2>
+  <div id="patrows"></div>
+</div>
+
+<footer><span>Direction 01 — Godly</span><span>61 entries · Meta Ad Library research, Sep 18 2026</span></footer>
+
+<script>
+const ADS=[
+{b:"HeadshotPro",t:"paid",c:"AI tools",s:"indie",f:"image",h:"Best AI Headshots 🏆",x:"Professional business headshots, done for you in 2 hours or less. ✅ 100% Online ✅ No appointments ✅ Full refund if you don't get an incredible headshot.",cta:"Learn more",r:"Running since Feb 27, 2026 — longest active run found"},
+{b:"HubSpot",t:"paid",c:"marketing",s:"big",f:"video",h:"Free Instagram Strategies",x:"Ready to see ROI on your Instagram posts? Get our free guide to Instagram for business.",cta:"Get offer",r:"Running since Mar 24, 2026"},
+{b:"Notion",t:"paid",c:"productivity",s:"big",f:"image",h:"Solve Work with Notion.",x:"Create Custom AI Agents to automate your work — from weekly reports to ticket triage — running on triggers you set.",cta:"Sign up",r:"Running since Aug 5, 2026"},
+{b:"Semrush",t:"paid",c:"marketing",s:"big",f:"image",h:"Don't disappear in AI",x:"SEO isn't just about websites anymore 👀 AI now reads Reddit, LinkedIn, and reviews too.",cta:"Learn more",r:"Running since Jun 5, 2026"},
+{b:"Canva",t:"paid",c:"design",s:"big",f:"video",h:"Try Canva Magic Layers",x:"Slice any flat image into a fully editable design with Canva Magic Layers.",cta:"Learn more",r:"Running since Jun 5, 2026"},
+{b:"ClickUp",t:"paid",c:"productivity",s:"big",f:"image",h:"One app instead of ten",x:"ClickUp handles your tasks, docs, goals, and chat. No more switching between tools to get work done.",cta:"Sign up",r:"Running since Sep 17, 2026"},
+{b:"Monday.com",t:"paid",c:"productivity",s:"big",f:"video",h:"Upgrade from Airtable",x:"Why settle for Airtable? monday.com gives your team more power, flexibility, and speed. Try it free.",cta:"Sign up",r:"Running since Sep 7, 2026"},
+{b:"Duolingo",t:"organic",c:"marketing",s:"big",f:"reel",h:"The unhinged owl",x:"Mascot-led chaos content — the owl threatens, begs, and roasts followers into doing their lessons.",cta:"Follow",r:"Feb 2025 mascot-death stunt broke the internet"}
+];
+const PATS=[
+["01","Longevity is the only public metric","Meta publishes no CTR or ROAS. HeadshotPro has run the same ad since Feb 27, 2026 — advertisers keep spending on what works."],
+["02","Checklist copy beats clever copy","✅ 100% Online ✅ No appointments ✅ 2 hours or less. Specificity converts; adjectives don't."],
+["03","Name the enemy","Monday.com runs conquest ads against Airtable. ClickUp: 'One app instead of ten.' Pick a fight."],
+["04","Offer-led lead magnets","HubSpot's free Instagram guide has run since March. Give the playbook away, sell the platform."]
+];
+const grid=document.getElementById('cards');
+ADS.forEach((a,i)=>{
+  const d=document.createElement('div');
+  d.className='card reveal';d.dataset.t=a.t;d.dataset.c=a.c;
+  d.innerHTML=`<div class="meta">${a.t} · ${a.c} · ${a.f}</div><h3>${a.b} — ${a.h}</h3><p class="copy">${a.x}</p><div class="foot"><span>${a.r}</span><span class="cta">${a.cta} →</span></div>`;
+  grid.appendChild(d);
+});
+document.getElementById('patrows').innerHTML=PATS.map(p=>`<div class="pat-row reveal"><span class="no">${p[0]}</span><h3>${p[1]}</h3><p>${p[2]}</p></div>`).join('');
+document.getElementById('filters').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('on'));
+  e.target.classList.add('on');
+  const f=e.target.dataset.f;
+  document.querySelectorAll('.card').forEach(c=>{
+    c.style.display=(f==='all'||c.dataset.t===f||c.dataset.c===f)?'flex':'none';
+  });
+});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%5*0.04)+'s';io.observe(el)});
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;cio.unobserve(e.target);
+  const end=+e.target.dataset.count,t0=performance.now();
+  (function tick(t){const p=Math.min((t-t0)/1200,1);e.target.textContent=Math.round(end*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(tick)})(t0);
+}),{threshold:.5});
+document.querySelectorAll('.n').forEach(n=>cio.observe(n));
+</script>
+</body>
+</html>
