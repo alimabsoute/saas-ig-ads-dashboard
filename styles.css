@@ -54,6 +54,8 @@ body{margin:0;background:var(--bg);color:var(--ink);
 .badge.indie{background:#fdf3e0;color:var(--amber)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-size:12px;background:#f1f3f7;color:#3c4250;border-radius:6px;padding:2px 9px}
+.native-creative{margin:8px 0;border-radius:8px;overflow:hidden;background:#f1f3f7}
+.native-creative img{width:100%;height:auto;display:block;max-height:400px;object-fit:contain}
 .hook{font-size:16.5px;font-weight:650;margin:2px 0 0;line-height:1.4}
 .hook::before{content:"\201C"}.hook::after{content:"\201D"}
 .copy{margin:0;color:#3c4250;font-size:14px}
