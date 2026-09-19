@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SaaS IG Ad &amp; Content Dashboard</title>
+<meta name="description" content="Private research dashboard: best-performing Instagram ads and organic posts from SaaS brands and indie builders, with teardowns and stealable patterns.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <h1>SaaS IG Ad &amp; Content Dashboard</h1>
+    <p class="sub">The best-performing Instagram ads and organic posts from SaaS companies — big brands and indie builders — with teardowns of why each worked and the patterns worth stealing.</p>
+    <span class="date">Research date: September 18, 2026</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="tabs" id="tabs" aria-label="Dashboard sections">
+    <button class="tab active" data-tab="paid">Paid Ads <span class="count" id="count-paid"></span></button>
+    <button class="tab" data-tab="organic">Organic Posts <span class="count" id="count-organic"></span></button>
+    <button class="tab" data-tab="patterns">Patterns</button>
+  </nav>
+
+  <section id="view-paid">
+    <div class="filters" id="filters-paid"></div>
+    <p class="result-count" id="rc-paid"></p>
+    <div class="grid" id="grid-paid"></div>
+  </section>
+
+  <section id="view-organic" hidden>
+    <div class="filters" id="filters-organic"></div>
+    <p class="result-count" id="rc-organic"></p>
+    <div class="grid" id="grid-organic"></div>
+  </section>
+
+  <section id="view-patterns" hidden>
+    <div id="patterns"></div>
+  </section>
+
+  <footer class="method">
+    <strong>Methodology.</strong> Meta does not publish true performance data (CTR, ROAS, spend) for commercial ads, so paid ranking uses <strong>ad longevity</strong> — start date to still-active on Sep 18, 2026 — as the proxy: advertisers keep spending on what works. Organic ranking uses documented engagement where available. All copy is verbatim or faithfully summarized from the cited sources; fields a source didn't document are labeled "not documented." Nothing here is invented.
+  </footer>
+</main>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true">
+  <div class="dialog" id="dialog"></div>
+</div>
+
+<script src="assets/data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
