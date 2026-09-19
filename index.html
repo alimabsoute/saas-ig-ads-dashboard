@@ -3,45 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SaaS IG Ad &amp; Content Dashboard</title>
-<meta name="description" content="Private research dashboard: best-performing Instagram ads and organic posts from SaaS brands and indie builders, with teardowns and stealable patterns.">
+<title>The SaaS Ad Library</title>
+<meta name="description" content="117 native Instagram ad creatives from SaaS brands — AI tools and AI photo apps — with teardowns of why each worked.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header class="site-header">
-  <div class="wrap">
-    <h1>SaaS IG Ad &amp; Content Dashboard</h1>
-    <p class="sub">The best-performing Instagram ads and organic posts from SaaS companies — big brands and indie builders — with teardowns of why each worked and the patterns worth stealing.</p>
-    <span class="date">Research date: September 18, 2026</span>
+<nav class="pill" aria-label="Sections">
+  <a href="#library">Library</a><a href="#patterns">Patterns</a>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">Meta Ad Library · Sep 2026</div>
+  <h1>The SaaS<br><b>Ad Library</b>,<br>native.</h1>
+  <p>117 Instagram ads with their <b>actual creative files</b> — not descriptions — plus 15 organic posts that broke out. Every paid card shows the real image as it ran, with verbatim copy, CTA, run dates, and a teardown of why it worked.</p>
+  <div class="stats">
+    <div class="stat"><span class="n" data-count="132">0</span><div class="l">Total entries</div></div>
+    <div class="stat"><span class="n" data-count="117">0</span><div class="l">Paid ads, native</div></div>
+    <div class="stat"><span class="n" data-count="15">0</span><div class="l">Organic posts</div></div>
   </div>
 </header>
 
-<main class="wrap">
+<main id="library">
   <nav class="tabs" id="tabs" aria-label="Dashboard sections">
-    <button class="tab active" data-tab="paid">Paid Ads <span class="count" id="count-paid"></span></button>
-    <button class="tab" data-tab="organic">Organic Posts <span class="count" id="count-organic"></span></button>
+    <button class="tab active" data-tab="paid">Paid <span class="count" id="count-paid"></span></button>
+    <button class="tab" data-tab="organic">Organic <span class="count" id="count-organic"></span></button>
     <button class="tab" data-tab="patterns">Patterns</button>
   </nav>
 
   <section id="view-paid">
+    <div class="sec-head"><h2>Paid ads</h2><span id="rc-paid"></span></div>
     <div class="filters" id="filters-paid"></div>
-    <p class="result-count" id="rc-paid"></p>
     <div class="grid" id="grid-paid"></div>
   </section>
 
   <section id="view-organic" hidden>
+    <div class="sec-head"><h2>Organic posts</h2><span id="rc-organic"></span></div>
     <div class="filters" id="filters-organic"></div>
-    <p class="result-count" id="rc-organic"></p>
     <div class="grid" id="grid-organic"></div>
   </section>
 
   <section id="view-patterns" hidden>
-    <div id="patterns"></div>
+    <div class="patterns">
+      <div class="eyebrow">Patterns</div>
+      <h2>What keeps<br>working.</h2>
+      <div id="patterns"></div>
+    </div>
   </section>
 
   <footer class="method">
-    <strong>Methodology.</strong> Meta does not publish true performance data (CTR, ROAS, spend) for commercial ads, so paid ranking uses <strong>ad longevity</strong> — start date to still-active on Sep 18, 2026 — as the proxy: advertisers keep spending on what works. Organic ranking uses documented engagement where available. All copy is verbatim or faithfully summarized from the cited sources; fields a source didn't document are labeled "not documented." Nothing here is invented.
+    <strong>Methodology.</strong> Meta does not publish true performance data (CTR, ROAS, spend) for commercial ads, so paid ranking uses <strong>ad longevity</strong> — start date to still-active on Sep 19, 2026 — as the proxy: advertisers keep spending on what works. Ads are ranked "top by impressions" per Meta's own sort. All copy is verbatim from the Ad Library; fields a source didn't document are labeled. Nothing here is invented.
   </footer>
 </main>
 
@@ -49,7 +62,6 @@
   <div class="dialog" id="dialog"></div>
 </div>
 
-<script src="assets/data.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
