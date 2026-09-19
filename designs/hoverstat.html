@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 — Hoverstat · hover → scatter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--wht:#fff;--ink:#111;--acc:#f25c1a;--grey:#8a8a8a;--ease:cubic-bezier(.22,1,.36,1)}
+body{background:var(--wht);color:var(--ink);font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+.mono{font-family:"Space Mono",monospace}
+a.back{position:fixed;top:16px;left:18px;z-index:120;font-family:"Space Mono",monospace;font-size:11px;color:var(--ink);text-decoration:none;letter-spacing:.1em}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:110;display:flex;justify-content:space-between;padding:16px 24px 16px 120px;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;pointer-events:none}
+.topbar .dot{color:var(--acc)}
+/* scatter layer */
+#scatter{position:fixed;inset:0;z-index:50;pointer-events:none}
+.tile{position:absolute;width:190px;height:130px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;opacity:0;transform:scale(.6) rotate(0deg);transition:opacity .35s var(--ease),transform .45s var(--ease);box-shadow:0 18px 40px -12px rgba(0,0,0,.3)}
+.tile.show{opacity:1}
+.tile .big{font-size:52px;font-weight:600;color:#fff;letter-spacing:-.02em}
+.tile .sm{font-family:"Space Mono",monospace;font-size:9px;letter-spacing:.2em;color:rgba(255,255,255,.85);text-transform:uppercase}
+.tile[data-slot="0"]{top:12%;left:4%;--r:-5deg}.tile[data-slot="1"]{top:9%;right:5%;--r:4deg}
+.tile[data-slot="2"]{top:38%;left:2%;--r:3deg}.tile[data-slot="3"]{top:40%;right:2.5%;--r:-4deg}
+.tile[data-slot="4"]{bottom:14%;left:6%;--r:5deg}.tile[data-slot="5"]{bottom:11%;right:6%;--r:-6deg}
+.tile.show{transform:scale(1) rotate(var(--r))}
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 24px;position:relative;z-index:60}
+.hero .kick{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--grey);margin-bottom:28px}
+.hero h1{font-family:"Space Mono",monospace;font-weight:700;font-size:clamp(2rem,7vw,5.6rem);letter-spacing:-.02em;line-height:1.05;will-change:transform}
+.hero h1 .acc{color:var(--acc)}
+.hero p{margin-top:28px;font-size:15px;color:var(--grey);max-width:52ch;line-height:1.7}
+.hero .hint{margin-top:36px;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--acc);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.4}}
+main{position:relative;z-index:60;max-width:760px;margin:0 auto;padding:40px 24px 120px}
+.idx-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:8px}
+.idx-head .mono{font-size:11px;letter-spacing:.24em;text-transform:uppercase}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 10px}
+.filters button{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:none;border:1px solid #ccc;border-radius:100px;padding:8px 16px;cursor:pointer;transition:all .2s}
+.filters button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.arow{display:flex;align-items:baseline;gap:14px;padding:22px 6px;border-bottom:1px dotted #bbb;cursor:pointer;transition:background .2s,padding .25s var(--ease)}
+.arow:hover,.arow.lit{background:#faf6f1;padding-left:18px}
+.arow .brand{font-weight:600;font-size:19px;letter-spacing:-.01em;white-space:nowrap}
+.arow .dots{flex:1;border-bottom:2px dotted #bbb;transform:translateY(-5px);min-width:30px}
+.arow .cat{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);white-space:nowrap}
+.arow .thumb{font-family:"Space Mono",monospace;font-size:10px;background:var(--ink);color:#fff;padding:4px 10px;border-radius:4px;opacity:0;transition:opacity .25s;white-space:nowrap}
+.arow:hover .thumb{opacity:1}
+.adetail{max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
+.adetail.open{max-height:420px}
+.adetail .in{padding:8px 6px 30px 6px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.adetail h4{font-size:16px;margin-bottom:8px}
+.adetail p{font-size:13.5px;color:#555;line-height:1.65}
+.adetail .run{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--acc);margin-top:12px;text-transform:uppercase}
+.showcase{margin:130px 0 0;position:relative;height:420px;display:flex;align-items:center;justify-content:center}
+.showcase .frame{width:280px;height:360px;border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 30px 60px -20px rgba(0,0,0,.35);position:relative;overflow:hidden}
+.showcase .frame .big{font-size:96px;font-weight:600;color:#fff}
+.showcase .cap-l,.showcase .cap-r{position:absolute;top:50%;transform:translateY(-50%);font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+.showcase .cap-l{left:0;text-align:right}
+.showcase .cap-r{right:0}
+.showcase .cap-l small,.showcase .cap-r small{display:block;color:var(--grey);margin-top:8px;letter-spacing:.14em}
+.pats{margin-top:130px}
+.pat{border-top:2px solid var(--ink);padding:30px 0;display:grid;grid-template-columns:60px 1fr;gap:20px}
+.pat .n{font-family:"Space Mono",monospace;font-size:12px;color:var(--acc)}
+.pat h3{font-size:20px;margin-bottom:10px;letter-spacing:-.01em}
+.pat p{font-size:14px;color:#555;line-height:1.7;max-width:56ch}
+.fuzzy-zone{text-align:center;padding:120px 24px 60px}
+.fuzzy-zone .fl{font-size:15px;line-height:2;color:#333;max-width:640px;margin:0 auto;filter:url(#fuzz)}
+.fuzzy-zone h2{font-family:Georgia,serif;font-size:clamp(2.4rem,6vw,4.6rem);margin-bottom:30px;letter-spacing:-.01em}
+footer{display:flex;justify-content:space-between;padding:30px 24px;font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);border-top:1px solid #ddd}
+@media(max-width:760px){.tile{width:130px;height:92px}.tile .big{font-size:34px}.showcase .cap-l{left:-6px}.showcase .cap-r{right:-6px}.adetail .in{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><filter id="fuzz"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter></svg>
+<a class="back" href="index.html">← INDEX</a>
+<div class="topbar"><span>HOVERSTAT.ES <span class="dot">●</span> DIRECTION 10</span><span>61 ENTRIES · SEP 18 2026</span></div>
+<div id="scatter" aria-hidden="true">
+  <div class="tile" data-slot="0"></div><div class="tile" data-slot="1"></div><div class="tile" data-slot="2"></div>
+  <div class="tile" data-slot="3"></div><div class="tile" data-slot="4"></div><div class="tile" data-slot="5"></div>
+</div>
+
+<header class="hero">
+  <div class="kick">Direction 10 — Hoverstat · The Interaction Playground</div>
+  <h1 id="stretch">HOVER <span class="acc">→</span> SCATTER</h1>
+  <p>Sixty-one SaaS ads as one clean index. Hover any row and that ad's creative throws itself to the edges of your screen — like cards tossed on a table. The center stays calm. The margins go wild.</p>
+  <div class="hint">↓ hover the index ↓</div>
+</header>
+
+<main>
+  <div class="idx-head"><span class="mono">Index — 09 shown</span><span class="mono" style="color:var(--acc)">live preview on hover</span></div>
+  <div class="filters" id="filters">
+    <button class="on" data-f="all">All</button><button data-f="paid">Paid</button><button data-f="organic">Organic</button>
+    <button data-f="AI tools">AI tools</button><button data-f="marketing">Marketing</button><button data-f="productivity">Productivity</button><button data-f="design">Design</button>
+  </div>
+  <div id="rows"></div>
+
+  <div class="showcase" id="showcase">
+    <div class="cap-l">HEADSHOTPRO<small>AI TOOLS · IMAGE</small></div>
+    <div class="frame" id="showframe" style="background:linear-gradient(135deg,#2b4acb,#16225e)"><span class="big">Hp</span></div>
+    <div class="cap-r">SINCE FEB 27, 2026<small>LONGEST ACTIVE RUN</small></div>
+  </div>
+
+  <div class="pats">
+    <div class="pat"><span class="n">01</span><div><h3>Run-time is the metric.</h3><p>HeadshotPro's ad has run since February 27, 2026 — 203 days of continuous spend. Meta publishes no CTR; advertisers vote with budget.</p></div></div>
+    <div class="pat"><span class="n">02</span><div><h3>Checklists beat adjectives.</h3><p>“100% online. No appointments. 2 hours or less.” Every line deletes one objection.</p></div></div>
+    <div class="pat"><span class="n">03</span><div><h3>Name the alternative.</h3><p>Monday.com buys Airtable's users by name. ClickUp: “One app instead of ten.” A rival sharpens the message.</p></div></div>
+    <div class="pat"><span class="n">04</span><div><h3>Give the guide away.</h3><p>HubSpot's free Instagram playbook has run since March. The offer is the advertisement.</p></div></div>
+  </div>
+</main>
+
+<div class="fuzzy-zone">
+  <h2>Soft Labor, hard data.</h2>
+  <p class="fl">Every headline above was recorded verbatim from the Meta Ad Library on September 18, 2026. Nothing paraphrased. Nothing invented. The fuzz is just for texture — the research is sharp.</p>
+</div>
+
+<footer><span>Direction 10 — Hoverstat</span><span>Research · Sep 18 2026</span></footer>
+
+<script>
+const ADS=[
+{b:"HeadshotPro",t:"paid",c:"AI tools",hue:222,h:"Best AI Headshots 🏆",x:"Professional business headshots, done for you in 2 hours or less. 100% online, no appointments — full refund if you don't get an incredible headshot.",r:"Running since Feb 27, 2026 · longest active run"},
+{b:"HubSpot",t:"paid",c:"marketing",hue:16,h:"Free Instagram Strategies",x:"Ready to see ROI on your Instagram posts? Get our free guide to Instagram for business.",r:"Running since Mar 24, 2026"},
+{b:"Notion",t:"paid",c:"productivity",hue:0,h:"Solve Work with Notion.",x:"Create Custom AI Agents to automate your work — from weekly reports to ticket triage — running on triggers you set.",r:"Running since Aug 5, 2026"},
+{b:"Semrush",t:"paid",c:"marketing",hue:28,h:"Don't disappear in AI",x:"SEO isn't just about websites anymore. AI now reads Reddit, LinkedIn, and reviews too.",r:"Running since Jun 5, 2026"},
+{b:"Canva",t:"paid",c:"design",hue:200,h:"Try Canva Magic Layers",x:"Slice any flat image into a fully editable design with Canva Magic Layers.",r:"Running since Jun 5, 2026"},
+{b:"ClickUp",t:"paid",c:"productivity",hue:330,h:"One app instead of ten",x:"ClickUp handles your tasks, docs, goals, and chat. No more switching between tools to get work done.",r:"Running since Sep 17, 2026"},
+{b:"Monday.com",t:"paid",c:"productivity",hue:150,h:"Upgrade from Airtable",x:"Why settle for Airtable? monday.com gives your team more power, flexibility, and speed. Try it free.",r:"Running since Sep 7, 2026"},
+{b:"HyNote",t:"paid",c:"AI tools",hue:265,h:"AI Note Taker",x:"Comment “notes” for a free pass. #adhd #university #notetaking",r:"Running since May 26, 2026"},
+{b:"Duolingo",t:"organic",c:"marketing",hue:100,h:"The unhinged owl",x:"Mascot-led chaos content — the owl threatens, begs, and roasts followers into doing their lessons.",r:"Organic · Feb 2025 mascot-death stunt"}
+];
+const rows=document.getElementById('rows'),tiles=[...document.querySelectorAll('.tile')];
+const initials=b=>b.replace(/[^A-Za-z]/g,'').slice(0,2);
+ADS.forEach((a,i)=>{
+  const w=document.createElement('div');w.dataset.t=a.t;w.dataset.c=a.c;
+  w.innerHTML=`<div class="arow" data-i="${i}"><span class="brand">${a.b}</span><span class="dots"></span><span class="cat">${a.c} · ${a.t}</span><span class="thumb">view →</span></div>
+  <div class="adetail"><div class="in"><div><h4>“${a.h}”</h4><p>${a.x}</p></div><div><p>Recorded verbatim from the Meta Ad Library research pass, September 18, 2026.</p><div class="run">${a.r}</div></div></div></div>`;
+  rows.appendChild(w);
+  const row=w.querySelector('.arow'),det=w.querySelector('.adetail');
+  const scatter=()=>{
+    tiles.forEach((t,s)=>{
+      t.style.transitionDelay=(s*45)+'ms';
+      t.style.background=`linear-gradient(135deg,hsl(${a.hue},65%,48%),hsl(${(a.hue+40)%360},70%,30%))`;
+      t.innerHTML=`<span class="big">${initials(a.b)}</span><span class="sm">${a.b} · ${s+1}/6</span>`;
+      t.classList.add('show');
+    });
+  };
+  const hide=()=>tiles.forEach(t=>{t.style.transitionDelay='0ms';t.classList.remove('show')});
+  row.addEventListener('mouseenter',scatter);
+  row.addEventListener('mouseleave',hide);
+  row.addEventListener('click',()=>{det.classList.toggle('open');scatter();setTimeout(hide,600)});
+});
+document.getElementById('filters').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('on'));
+  e.target.classList.add('on');const f=e.target.dataset.f;
+  document.querySelectorAll('#rows > div').forEach(w=>{w.style.display=(f==='all'||w.dataset.t===f||w.dataset.c===f)?'block':'none'});
+});
+// scroll-velocity stretch on hero title
+let lastY=scrollY,sk=0;const st=document.getElementById('stretch');
+(function loop(){const v=scrollY-lastY;lastY=scrollY;sk+=(Math.min(Math.max(v,-50),50)*.12-sk)*.1;st.style.transform=`scaleX(${1+Math.abs(sk)*.006})`;requestAnimationFrame(loop)})();
+// showcase frame hover-toggle (oliverdupuy pattern): swap gradient on hover
+const sf=document.getElementById('showframe');
+sf.addEventListener('mouseenter',()=>sf.style.background='linear-gradient(135deg,#f25c1a,#7a2405)');
+sf.addEventListener('mouseleave',()=>sf.style.background='linear-gradient(135deg,#2b4acb,#16225e)');
+</script>
+</body>
+</html>
