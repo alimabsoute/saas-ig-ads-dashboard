@@ -173,6 +173,17 @@
     return '<div><dt>' + esc(label) + "</dt><dd>" + esc(val) + "</dd></div>";
   }
 
+  function bulletsHtml(e) {
+    var bullets = e.analysis_bullets;
+    if (!bullets || !bullets.length) {
+      return '<p>' + esc(e.why_it_worked || "") + "</p>";
+    }
+    return '<ul class="bullets">' + bullets.map(function (bl) {
+      var h = esc(bl).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+      return "<li>" + h + "</li>";
+    }).join("") + "</ul>";
+  }
+
   function cardHtml(e, full) {
     var tags = (e.hashtags || []).map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("");
     var acct = e.account ? ' <span class="acct">' + esc(e.account) + "</span>" : "";
@@ -190,7 +201,7 @@
       '<dl class="rows">' +
         rowHtml("Angle", e.angle) + rowHtml("CTA", e.cta) + rowHtml("Visual", e.visual) + libLine +
       "</dl>" +
-      '<div class="why"><strong>Why it worked</strong><p class="' + (full ? "" : "clamp") + '">' + esc(e.why_it_worked) + "</p></div>" +
+      '<div class="why"><strong>Why it worked</strong>' + bulletsHtml(e) + "</div>" +
       '<p class="proof">' + esc(e.proof) + "</p>" +
       (tags ? '<div class="hashtags">' + tags + "</div>" : "") +
       (e.source_url
@@ -270,8 +281,11 @@
       '<p class="copy">' + esc(e.copy) + "</p>" +
       '<dl class="rows">' + rowHtml("Angle", e.angle) + rowHtml("CTA", e.cta) + rowHtml("Visual", e.visual) +
         (e.library_id ? rowHtml("Ad ID", "Meta Ad Library ID " + e.library_id) : "") + "</dl>" +
-      '<div class="why"><strong>Why it worked</strong><p>' + esc(e.why_it_worked) + "</p></div>" +
+      '<div class="why"><strong>Why it worked</strong>' + bulletsHtml(e) + "</div>" +
       '<p class="proof">' + esc(e.proof) + "</p>" +
+      '<div class="recreate"><div class="recreate-head"><strong>Recreate this ' + (e.tab === "paid" ? "ad" : "post") + '</strong>' +
+      '<button class="copybtn" data-copy="' + esc(e.id) + '">Copy prompt</button></div>' +
+      '<pre class="recreate-prompt">' + esc(e.recreate_prompt || "") + "</pre></div>" +
       ((e.hashtags && e.hashtags.length)
         ? '<div class="hashtags">' + e.hashtags.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("") + "</div>"
         : "") +
@@ -294,6 +308,26 @@
         });
       });
     });
+    var copyBtn = dialog.querySelector(".copybtn");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        var id = copyBtn.getAttribute("data-copy");
+        var entry = null;
+        for (var i = 0; i < data.length; i++) if (data[i].id === id) { entry = data[i]; break; }
+        var txt = entry ? (entry.recreate_prompt || "") : "";
+        function done() { copyBtn.textContent = "Copied!"; setTimeout(function(){ copyBtn.textContent = "Copy prompt"; }, 1600); }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(txt).then(done, function(){ fallback(); });
+        } else { fallback(); }
+        function fallback() {
+          var ta = document.createElement("textarea");
+          ta.value = txt; document.body.appendChild(ta); ta.select();
+          try { document.execCommand("copy"); } catch (err) {}
+          document.body.removeChild(ta); done();
+        }
+      });
+    }
   }
 
   function closeModal() {
@@ -437,6 +471,16 @@
         html += '<div class="pat-row"><div class="no">' + String(pi + 1).padStart(2, "0") + "." + (ii + 1) + "</div>" +
           "<h3>" + t + "</h3><p>" + b + "</p></div>";
       });
+    });
+    html += '<div class="pat-row steal-head"><div class="no">+</div>' +
+      "<h3>Steal this for your products</h3><p>Each pattern below is mapped to one of Ali's live products — inkspell, oporae, ai-pulse, forkfox, free-tools-atlas — with a concrete move to run.</p></div>";
+    STEAL.forEach(function (s, si) {
+      html += '<div class="pat-row steal"><div class="no">S' + (si + 1) + "</div>" +
+        "<h3>" + s[0] + "</h3><p><strong>" + s[1] + "</strong><br>";
+      s[2].forEach(function (pair) {
+        html += "<em>" + pair[0] + ":</em> " + pair[1] + "<br>";
+      });
+      html += "</p></div>";
     });
     document.getElementById("patterns").innerHTML = html;
   }
