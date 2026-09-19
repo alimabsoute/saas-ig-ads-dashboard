@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>07 — MaxiBestOf · AD[LIB]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--blk:#000;--wht:#fff;--lime:#DAFA9C;--g1:#8A8A8A;--g2:#333;--panel:#0d0d0d}
+body{background:var(--blk);color:var(--wht);font-family:"JetBrains Mono",monospace;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#loader{position:fixed;inset:0;background:#000;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .5s,visibility .5s}
+#loader.done{opacity:0;visibility:hidden}
+#loader .pct{font-size:64px;font-weight:700}
+#loader .lbl{font-size:12px;letter-spacing:.3em;color:var(--g1)}
+#loader .bar{width:220px;height:2px;background:#222}
+#loader .bar i{display:block;height:100%;width:0;background:var(--lime)}
+.dots{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:26px 26px}
+main{position:relative;z-index:1}
+a.back{position:fixed;top:16px;left:16px;z-index:100;font-size:11px;color:var(--wht);text-decoration:none;letter-spacing:.1em;opacity:.6}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;border-bottom:1px solid var(--g2);font-size:12px;letter-spacing:.14em}
+.topbar .sq{color:var(--lime)}
+.tele{border-bottom:1px solid var(--g2);padding:10px 28px;font-size:11px;letter-spacing:.12em;color:var(--g1);display:flex;gap:32px;flex-wrap:wrap}
+.tele b{color:var(--wht);font-weight:400}
+.hero{padding:90px 28px 70px;position:relative;overflow:hidden}
+.hero .idx{font-size:12px;letter-spacing:.3em;color:var(--lime);margin-bottom:26px}
+.hero h1{font-family:Anton,sans-serif;font-size:clamp(4rem,17vw,15rem);line-height:.92;letter-spacing:.005em;text-transform:uppercase}
+.hero h1 .l{color:var(--lime)}
+.hero .sub{margin-top:30px;font-size:13px;line-height:1.9;color:var(--g1);max-width:72ch;letter-spacing:.04em}
+.hero .sub b{color:var(--wht);font-weight:600}
+.marquee{border-top:1px solid var(--g2);border-bottom:1px solid var(--g2);overflow:hidden;white-space:nowrap;padding:16px 0}
+.marquee .track{display:inline-block;animation:mq 22s linear infinite;font-size:14px;letter-spacing:.2em}
+.marquee .track .l{color:var(--lime)}
+@keyframes mq{to{transform:translateX(-50%)}}
+section{padding:80px 28px;max-width:1280px;margin:0 auto}
+.sec-t{font-size:12px;letter-spacing:.3em;color:var(--lime);margin-bottom:8px}
+h2{font-family:Anton,sans-serif;font-size:clamp(2.4rem,6vw,4.6rem);text-transform:uppercase;letter-spacing:.01em;margin-bottom:40px}
+.filters{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--g2);margin-bottom:40px}
+.filters button{font-family:inherit;font-size:11px;letter-spacing:.18em;text-transform:uppercase;background:none;border:none;border-right:1px solid var(--g2);color:var(--wht);padding:15px 24px;cursor:pointer;opacity:.55;transition:all .2s}
+.filters button.on{opacity:1;background:var(--lime);color:#000;font-weight:700}
+.panels{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.panel{background:var(--panel);border:1px solid var(--g2);position:relative;padding:34px 30px 28px;min-height:280px;display:flex;flex-direction:column;gap:14px;transition:border-color .25s}
+.panel:hover{border-color:var(--lime)}
+.panel .file{position:absolute;top:-1px;left:-1px;background:var(--lime);color:#000;font-size:10px;font-weight:700;letter-spacing:.14em;padding:6px 12px}
+.panel .meta{font-size:10px;letter-spacing:.2em;color:var(--g1);margin-top:14px}
+.panel h3{font-family:Anton,sans-serif;font-size:30px;letter-spacing:.01em;line-height:1.05;text-transform:uppercase}
+.panel h3 .l{color:var(--lime)}
+.panel p{font-size:12.5px;line-height:1.8;color:#c9c9c9;font-family:Inter,sans-serif}
+.panel .foot{margin-top:auto;display:flex;justify-content:space-between;font-size:10px;letter-spacing:.12em;color:var(--g1);border-top:1px solid var(--g2);padding-top:14px}
+.panel .foot .cta{color:var(--lime)}
+.halftone{position:absolute;top:0;right:0;width:120px;height:100%;background-image:radial-gradient(rgba(218,250,156,.28) 1.5px,transparent 1.5px);background-size:10px 10px;opacity:.5;pointer-events:none;-webkit-mask-image:linear-gradient(to left,black,transparent);mask-image:linear-gradient(to left,black,transparent)}
+.pats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.pat{border:1px solid var(--g2);padding:28px;position:relative}
+.pat .n{font-size:11px;color:var(--lime);letter-spacing:.2em;margin-bottom:14px}
+.pat h4{font-family:Anton,sans-serif;font-size:20px;text-transform:uppercase;margin-bottom:12px;letter-spacing:.02em}
+.pat p{font-size:12px;line-height:1.75;color:#c9c9c9;font-family:Inter,sans-serif}
+.pat .file{position:absolute;top:-1px;right:-1px;background:#1a1a1a;border:1px solid var(--g2);border-top:none;border-right:none;font-size:9px;letter-spacing:.14em;padding:5px 10px;color:var(--g1)}
+footer{border-top:1px solid var(--g2);padding:26px 28px;display:flex;justify-content:space-between;font-size:10px;letter-spacing:.18em;color:var(--g1);flex-wrap:wrap;gap:12px}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.rv.in{opacity:1;transform:none}
+@media(max-width:860px){.panels,.pats{grid-template-columns:1fr}.hero h1{font-size:20vw}}
+</style>
+</head>
+<body>
+<div id="loader"><div class="pct" id="pct">00%</div><div class="bar"><i id="barfill"></i></div><div class="lbl">LOADING / AD[LIB]</div></div>
+<div class="dots"></div>
+<a class="back" href="index.html">← INDEX</a>
+<main>
+  <div class="topbar"><span><span class="sq">■</span> AD[LIB] <span style="color:var(--g1)">/ DIRECTION 07</span></span><span><a href="#library" style="color:inherit;text-decoration:none">[01] LIBRARY</a> &nbsp;<a href="#patterns" style="color:inherit;text-decoration:none">[02] PATTERNS</a></span></div>
+  <div class="tele"><span>LAT <b>39.9526°N</b></span><span>LON <b>75.1652°W</b></span><span>LOCAL <b id="clock">--:--:--</b></span><span>EDITION <b>2026.09.18</b></span><span>STATUS <b style="color:var(--lime)">■ LIVE</b></span></div>
+
+  <header class="hero">
+    <div class="idx">[ DIRECTION 07 — MAXIBESTOF · BRUTALIST TERMINAL ]</div>
+    <h1>AD<span class="l">[</span>LIB<span class="l">]</span></h1>
+    <p class="sub"><b>61 ENTRIES.</b> 46 PAID ADS + 15 ORGANIC POSTS. VERBATIM COPY FROM THE META AD LIBRARY, RECORDED SEP 18 2026. NO SHADOWS. NO GRADIENTS. ONE ACCENT. <span style="color:var(--lime)">[ PICK A FILTER. READ THE RUN-DATES. ]</span></p>
+  </header>
+
+  <div class="marquee"><div class="track" id="mq"></div></div>
+
+  <section id="library">
+    <div class="sec-t">[01] — THE LIBRARY</div>
+    <h2>What's running<span style="color:var(--lime)">.</span></h2>
+    <div class="filters rv" id="filters">
+      <button class="on" data-f="all">[00] ALL</button><button data-f="paid">[01] PAID</button><button data-f="organic">[02] ORGANIC</button>
+      <button data-f="AI tools">[03] AI TOOLS</button><button data-f="marketing">[04] MARKETING</button><button data-f="productivity">[05] PRODUCTIVITY</button><button data-f="design">[06] DESIGN</button>
+    </div>
+    <div class="panels" id="panels"></div>
+  </section>
+
+  <section id="patterns">
+    <div class="sec-t">[02] — THE PLAYBOOK</div>
+    <h2>Four patterns<span style="color:var(--lime)">.</span></h2>
+    <div class="pats">
+      <div class="pat rv"><div class="file">PAT.01</div><div class="n">[01]</div><h4>Run-time = proof</h4><p>HeadshotPro: same ad since Feb 27, 2026. HubSpot: since Mar 24. Meta hides CTR — spend duration is the only public signal.</p></div>
+      <div class="pat rv"><div class="file">PAT.02</div><div class="n">[02]</div><h4>Checklist copy</h4><p>“100% online. No appointments. 2 hours or less.” Each line deletes one objection. Adjectives delete nothing.</p></div>
+      <div class="pat rv"><div class="file">PAT.03</div><div class="n">[03]</div><h4>Name the enemy</h4><p>Monday.com buys Airtable's users by name. ClickUp: “One app instead of ten.” A rival sharpens the message.</p></div>
+      <div class="pat rv"><div class="file">PAT.04</div><div class="n">[04]</div><h4>Free the guide</h4><p>HubSpot's free Instagram playbook has run six months. The offer is the advertisement.</p></div>
+    </div>
+  </section>
+
+  <footer><span>DIRECTION 07 — MAXIBESTOF</span><span>THIS IS A BORING WEBSITE · <span style="color:var(--lime)">■</span> 61 ENTRIES</span></footer>
+</main>
+
+<script>
+let p=0;const pct=document.getElementById('pct'),fill=document.getElementById('barfill');
+const li=setInterval(()=>{p=Math.min(100,p+Math.ceil(Math.random()*14));pct.textContent=String(p).padStart(2,'0')+'%';fill.style.width=p+'%';if(p>=100){clearInterval(li);setTimeout(()=>document.getElementById('loader').classList.add('done'),250)}},110);
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleTimeString('en-US',{hour12:false})},1000);
+const items=["HEADSHOTPRO","HUBSPOT","NOTION","SEMRUSH","CANVA","CLICKUP","MONDAY.COM","HYNOTE"];
+document.getElementById('mq').innerHTML=(items.map(b=>`${b} <span class="l">///</span> `).join('')).repeat(2);
+const FILES=["ADS.SYS","LIB.RAW","CTRL.SYS","META.DAT","RUN.LOG","IDX.07","AD.08","ORG.09"];
+const ADS=[
+{b:"HeadshotPro",t:"paid",c:"AI tools",h:"Best AI Headshots",x:"Professional business headshots in 2 hours or less. 100% online, no appointments, full refund guarantee.",cta:"LEARN MORE",r:"SINCE FEB 27 2026 · LONGEST RUN"},
+{b:"HubSpot",t:"paid",c:"marketing",h:"Free Instagram Strategies",x:"Ready to see ROI on your Instagram posts? Get the free guide to Instagram for business.",cta:"GET OFFER",r:"SINCE MAR 24 2026"},
+{b:"Notion",t:"paid",c:"productivity",h:"Solve Work with Notion",x:"Custom AI Agents automate repetitive workflows on triggers you set.",cta:"SIGN UP",r:"SINCE AUG 05 2026"},
+{b:"Semrush",t:"paid",c:"marketing",h:"Don't disappear in AI",x:"AI reads Reddit, LinkedIn, and reviews too — not just your website.",cta:"LEARN MORE",r:"SINCE JUN 05 2026"},
+{b:"Canva",t:"paid",c:"design",h:"Try Canva Magic Layers",x:"Slice any flat image into a fully editable design.",cta:"LEARN MORE",r:"SINCE JUN 05 2026"},
+{b:"ClickUp",t:"paid",c:"productivity",h:"One app instead of ten",x:"Tasks, docs, goals, chat. Stop switching tools.",cta:"SIGN UP",r:"SINCE SEP 17 2026"},
+{b:"Monday.com",t:"paid",c:"productivity",h:"Upgrade from Airtable",x:"More power, flexibility, speed. Try it free.",cta:"SIGN UP",r:"SINCE SEP 07 2026"},
+{b:"Duolingo",t:"organic",c:"marketing",h:"The unhinged owl",x:"Mascot chaos content. Threatens followers into lessons.",cta:"FOLLOW",r:"ORGANIC · FEB 2025 STUNT"}
+];
+const box=document.getElementById('panels');
+ADS.forEach((a,i)=>{
+  const d=document.createElement('div');d.className='panel rv';d.dataset.t=a.t;d.dataset.c=a.c;
+  const words=a.h.split(' ');
+  d.innerHTML=`<div class="halftone"></div><div class="file">${FILES[i]}</div><div class="meta">[${a.t.toUpperCase()}] / [${a.c.toUpperCase()}]</div><h3>${a.b} — “${words.slice(0,2).join(' ')} <span class="l">${words.slice(2).join(' ')}</span>”</h3><p>${a.x}</p><div class="foot"><span>${a.r}</span><span class="cta">[ ${a.cta} ]</span></div>`;
+  box.appendChild(d);
+});
+document.getElementById('filters').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('on'));
+  e.target.classList.add('on');const f=e.target.dataset.f;
+  document.querySelectorAll('.panel').forEach(c=>{c.style.display=(f==='all'||c.dataset.t===f||c.dataset.c===f)?'flex':'none'});
+});
+// word-stagger reveals
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
