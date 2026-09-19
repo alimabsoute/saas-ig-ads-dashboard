@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05 — Httpster · The SaaS Ad Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..800&family=Space+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--cream:#F4F0E8;--ink:#0A0A0A;--accent:#E07B39;--ease:cubic-bezier(.22,1,.36,1)}
+body{background:var(--cream);color:var(--ink);font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+.mono{font-family:"Space Mono",monospace}
+.label{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase}
+a.back{position:fixed;top:16px;right:20px;z-index:60;font-size:11px;color:var(--ink);text-decoration:none}
+.rail{position:fixed;left:0;top:0;bottom:0;width:150px;z-index:50;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 0 0 28px;border-right:1px solid var(--ink)}
+.rail a{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink);text-decoration:none;padding:8px 0;opacity:.45;position:relative;transition:opacity .25s}
+.rail a::before{content:"";position:absolute;left:-14px;top:50%;width:6px;height:1px;background:var(--ink);opacity:0;transition:opacity .25s}
+.rail a:hover,.rail a.on{opacity:1}
+.rail a:hover::before,.rail a.on::before{opacity:1}
+.rail .tick{font-size:10px;opacity:.35;margin-top:24px}
+main{margin-left:150px}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:0 4vw;position:relative}
+.hero .label{margin-bottom:24px}
+.hero h1{font-family:"Bodoni Moda",serif;font-size:18vw;line-height:.92;letter-spacing:.01em;white-space:nowrap;margin-left:-.06em}
+.hero h1 .out{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.hero h1 .solid{color:var(--ink)}
+.hero h1 .acc{color:var(--accent)}
+.hero .frag{margin-top:36px;font-family:"Bodoni Moda",serif;font-size:clamp(20px,2.6vw,34px);max-width:30ch;line-height:1.25}
+.hero .frag b{font-weight:700}
+.sec{padding:120px 4vw;max-width:1200px}
+.sec+.sec{border-top:1px solid var(--ink)}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}
+.sec-head h2{font-family:"Bodoni Moda",serif;font-size:clamp(2.4rem,5vw,4.4rem);font-weight:600}
+.sec-head .label{opacity:.55}
+.staccato{font-family:"Bodoni Moda",serif;font-size:clamp(22px,3vw,38px);line-height:1.2;margin:8px 0 48px;max-width:26ch}
+.staccato em{font-style:italic;color:var(--accent)}
+.filters{display:flex;gap:0;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-bottom:0}
+.filters button{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;background:none;border:none;border-right:1px solid var(--ink);padding:16px 26px;cursor:pointer;color:var(--ink);opacity:.5}
+.filters button.on{opacity:1;background:var(--ink);color:var(--cream)}
+.entry{display:grid;grid-template-columns:120px 1fr 1fr 140px;gap:28px;padding:34px 0;border-bottom:1px solid var(--ink);align-items:baseline}
+.entry .no{font-family:"Space Mono",monospace;font-size:12px;opacity:.5}
+.entry .brand{font-family:"Bodoni Moda",serif;font-size:30px;font-weight:600}
+.entry .brand small{display:block;font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;opacity:.55;margin-top:8px;font-weight:400}
+.entry .copy h4{font-size:16px;font-weight:600;margin-bottom:8px}
+.entry .copy p{font-size:14px;line-height:1.65;opacity:.8}
+.entry .run{font-family:"Space Mono",monospace;font-size:11px;text-align:right;line-height:1.7}
+.entry .run b{color:var(--accent)}
+.spec{border:1px solid var(--ink);padding:48px;margin-top:64px}
+.spec .label{margin-bottom:20px;display:block}
+.spec input{width:100%;background:none;border:none;border-bottom:1px solid var(--ink);font-family:"Bodoni Moda",serif;font-size:clamp(2rem,6vw,5rem);color:var(--ink);outline:none;padding:8px 0}
+.spec .hint{font-family:"Space Mono",monospace;font-size:11px;opacity:.5;margin-top:14px;letter-spacing:.1em}
+.pat{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--ink)}
+.pat div{padding:44px 40px 44px 0}
+.pat div+div{border-left:1px solid var(--ink);padding-left:40px}
+.pat .label{color:var(--accent);margin-bottom:16px;display:block}
+.pat h3{font-family:"Bodoni Moda",serif;font-size:30px;font-weight:600;margin-bottom:12px}
+.pat p{font-size:14.5px;line-height:1.7;opacity:.8}
+footer{border-top:1px solid var(--ink);padding:28px 4vw;display:flex;justify-content:space-between;align-items:center}
+footer .label{opacity:.6}
+#clock{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.14em}
+@media(max-width:860px){.rail{display:none}main{margin-left:0}.entry{grid-template-columns:1fr;gap:10px}.pat{grid-template-columns:1fr}.pat div+div{border-left:none;padding-left:0;border-top:1px solid var(--ink)}}
+</style>
+</head>
+<body>
+<a class="back mono" href="index.html" style="font-size:11px">← INDEX</a>
+<nav class="rail">
+  <a href="#top" class="on">Intro</a><a href="#library">Library</a><a href="#patterns">Patterns</a><a href="index.html">Index</a>
+  <div class="tick mono">05 / HTTPSTER<br>TYPE AS HERO</div>
+</nav>
+<main id="top">
+  <header class="hero">
+    <div class="label">Direction 05 — Httpster · Experimental Type</div>
+    <h1><span class="out">AD</span> <span class="solid">LIB</span><span class="acc">.</span></h1>
+    <p class="frag">Tap. Scroll. <b>Steal.</b><br>Sixty-one SaaS ads, set in type so large it <em style="font-style:italic">becomes</em> the image. No photography. No gradients. One accent.</p>
+  </header>
+
+  <section class="sec" id="library">
+    <div class="sec-head"><h2>The Library</h2><span class="label">08 / 61 shown</span></div>
+    <p class="staccato">Verbatim copy. <em>Verified dates.</em> Zero adjectives.</p>
+    <div class="filters" id="filters">
+      <button class="on" data-f="all">All</button><button data-f="paid">Paid</button><button data-f="organic">Organic</button>
+      <button data-f="AI tools">AI tools</button><button data-f="marketing">Marketing</button><button data-f="productivity">Productivity</button><button data-f="design">Design</button>
+    </div>
+    <div id="entries"></div>
+    <div class="spec">
+      <span class="label">Specimen — type your own headline</span>
+      <input id="specin" value="Steal this ad." maxlength="40" aria-label="Type your own headline">
+      <div class="hint">THE HERO IS YOUR WORDS · RENDERED LIVE</div>
+    </div>
+  </section>
+
+  <section class="sec" id="patterns">
+    <div class="sec-head"><h2>Patterns</h2><span class="label">04 notes</span></div>
+    <p class="staccato">Read the run-dates. <em>Trust the spend.</em></p>
+    <div class="pat">
+      <div><span class="label">01</span><h3>Longevity.</h3><p>HeadshotPro, running since Feb 27, 2026. HubSpot, since Mar 24. Meta hides CTR — advertisers vote with budget.</p></div>
+      <div><span class="label">02</span><h3>Checklists.</h3><p>100% online. No appointments. 2 hours or less. Each line deletes an objection.</p></div>
+      <div><span class="label">03</span><h3>Rivals.</h3><p>Monday.com buys Airtable's users by name. ClickUp: one app instead of ten.</p></div>
+      <div><span class="label">04</span><h3>Free guides.</h3><p>HubSpot's Instagram playbook, running six months. The offer is the ad.</p></div>
+    </div>
+  </section>
+
+  <footer><span class="label">Direction 05 — Httpster</span><span id="clock">--:--:--</span></footer>
+</main>
+
+<script>
+const ADS=[
+{b:"HeadshotPro",t:"paid",c:"AI tools",h:"Best AI Headshots 🏆",x:"Professional business headshots in 2 hours or less. 100% online, no appointments.",r:"<b>SINCE FEB 27</b><br>2026 · longest run"},
+{b:"HubSpot",t:"paid",c:"marketing",h:"Free Instagram Strategies",x:"Ready to see ROI on your Instagram posts? Get the free guide.",r:"<b>SINCE MAR 24</b><br>2026"},
+{b:"Notion",t:"paid",c:"productivity",h:"Solve Work with Notion.",x:"Custom AI Agents automate repetitive workflows on triggers you set.",r:"<b>SINCE AUG 05</b><br>2026"},
+{b:"Semrush",t:"paid",c:"marketing",h:"Don't disappear in AI",x:"AI reads Reddit, LinkedIn, and reviews too — not just your site.",r:"<b>SINCE JUN 05</b><br>2026"},
+{b:"Canva",t:"paid",c:"design",h:"Try Canva Magic Layers",x:"Slice any flat image into a fully editable design.",r:"<b>SINCE JUN 05</b><br>2026"},
+{b:"ClickUp",t:"paid",c:"productivity",h:"One app instead of ten",x:"Tasks, docs, goals, chat. Stop switching tools.",r:"<b>SINCE SEP 17</b><br>2026"},
+{b:"Monday.com",t:"paid",c:"productivity",h:"Upgrade from Airtable",x:"More power, flexibility, speed. Try it free.",r:"<b>SINCE SEP 07</b><br>2026"},
+{b:"Duolingo",t:"organic",c:"marketing",h:"The unhinged owl",x:"Mascot chaos. Threatens followers into lessons.",r:"ORGANIC<br>Feb 2025 stunt"}
+];
+const box=document.getElementById('entries');
+ADS.forEach((a,i)=>{
+  const d=document.createElement('div');d.className='entry';d.dataset.t=a.t;d.dataset.c=a.c;
+  d.innerHTML=`<div class="no">${String(i+1).padStart(2,'0')}</div><div class="brand">${a.b}<small>${a.t} · ${a.c}</small></div><div class="copy"><h4>“${a.h}”</h4><p>${a.x}</p></div><div class="run">${a.r}</div>`;
+  box.appendChild(d);
+});
+document.getElementById('filters').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('on'));
+  e.target.classList.add('on');const f=e.target.dataset.f;
+  document.querySelectorAll('.entry').forEach(c=>{c.style.display=(f==='all'||c.dataset.t===f||c.dataset.c===f)?'grid':'none'});
+});
+setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocaleTimeString('en-US',{hour12:false})+' LOCAL'},1000);
+// scroll-velocity stretch on hero
+let lastY=scrollY,skew=0;const h1=document.querySelector('.hero h1');
+(function loop(){const y=scrollY,v=y-lastY;lastY=y;skew+=(Math.min(Math.max(v,-40),40)*.15-skew)*.12;h1.style.transform=`scaleX(${1+Math.abs(skew)*.004}) skewX(${-skew*.15}deg)`;requestAnimationFrame(loop)})();
+// rail active state
+const links=[...document.querySelectorAll('.rail a[href^="#"]')];
+addEventListener('scroll',()=>{let cur='top';['top','library','patterns'].forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<200)cur=id});links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur))},{passive:true});
+</script>
+</body>
+</html>
