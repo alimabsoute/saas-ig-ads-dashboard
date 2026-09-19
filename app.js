@@ -222,16 +222,50 @@
 
   /* ---------------- modal ---------------- */
 
+  /* ---------------- native IG ad view ---------------- */
+
+  function nativeAdHtml(e) {
+    // Renders the ad as it appeared in the Instagram feed, using real data only.
+    // No metrics are invented: like counts are omitted because the Ad Library doesn't publish them.
+    var img = (e.has_native && e.native_file)
+      ? '<div class="ig-media"><img src="' + esc(e.native_file) + '" alt="Ad creative" loading="lazy"></div>'
+      : '<div class="ig-media ig-media-missing"><span>No native creative file for this ad</span></div>';
+    var ctaBtn = e.cta
+      ? '<a class="ig-cta" href="' + esc(e.source_url || "#") + '" target="_blank" rel="noopener" data-stop="1">' + esc(e.cta) + "</a>"
+      : "";
+    return (
+      '<div class="ig-ad">' +
+        '<div class="ig-head">' +
+          '<div class="ig-avatar">' + esc((e.brand || "?").charAt(0).toUpperCase()) + "</div>" +
+          '<div class="ig-headtxt"><strong>' + esc(e.brand) + '</strong><span>Sponsored</span></div>' +
+          '<div class="ig-more">···</div>' +
+        "</div>" +
+        img +
+        '<div class="ig-actions">' +
+          '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7.5-4.7-10-9.3C.4 8.6 2.4 5 5.8 5c2 0 3.4 1.1 4.2 2.3h4c.8-1.2 2.2-2.3 4.2-2.3 3.4 0 5.4 3.6 3.8 6.7C19.5 16.3 12 21 12 21z" transform="scale(0.9) translate(1.3,1.3)"/></svg>' +
+          '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a8 8 0 0 1-8 8H5l-2 2V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/></svg>' +
+          '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>' +
+        "</div>" +
+        (e.copy ? '<p class="ig-caption"><strong>' + esc(e.brand) + "</strong> " + esc(e.copy) + "</p>" : "") +
+        ctaBtn +
+        '<p class="ig-note">Reconstruction from Meta Ad Library data — real creative, copy, page name and CTA. Engagement counts not published by Meta.</p>' +
+      "</div>"
+    );
+  }
+
   function openModal(id, data) {
     var e = null;
     for (var i = 0; i < data.length; i++) if (data[i].id === id) { e = data[i]; break; }
     if (!e) return;
+    var hasNative = !!(e.has_native && e.native_file);
     dialog.innerHTML =
       '<button class="close" aria-label="Close">×</button>' +
       "<h2>" + esc(e.brand) + (e.account ? ' <span class="acct">' + esc(e.account) + "</span>" : "") + "</h2>" +
       '<div class="chips" style="margin:8px 0"><span class="badge ' + badgeClass(e.size) + '">' + esc(e.size) + "</span>" +
       '<span class="chip">' + esc(e.category) + '</span><span class="chip">' + esc(cap(e.format)) + "</span>" +
       '<span class="chip">' + (e.tab === "paid" ? "Paid ad" : "Organic post") + "</span></div>" +
+      (hasNative ? '<div class="viewtoggle"><button class="vt active" data-vt="analysis">Analysis</button><button class="vt" data-vt="native">As it appeared</button></div>' : "") +
+      '<div class="viewpane" data-pane="analysis">' +
       '<p class="hook">' + esc(e.hook) + "</p>" +
       '<p class="copy">' + esc(e.copy) + "</p>" +
       '<dl class="rows">' + rowHtml("Angle", e.angle) + rowHtml("CTA", e.cta) + rowHtml("Visual", e.visual) +
@@ -243,10 +277,23 @@
         : "") +
       (e.source_url
         ? '<p style="margin-top:12px"><a class="src" href="' + esc(e.source_url) + '" target="_blank" rel="noopener">Source: ' + esc(e.source_name) + " ↗</a></p>"
-        : '<p class="src" style="color:var(--muted)">Source: ' + esc(e.source_name) + "</p>");
+        : '<p class="src" style="color:var(--muted)">Source: ' + esc(e.source_name) + "</p>") +
+      "</div>" +
+      (hasNative ? '<div class="viewpane" data-pane="native" hidden>' + nativeAdHtml(e) + "</div>" : "");
     overlay.classList.add("open");
     document.body.style.overflow = "hidden";
     dialog.querySelector(".close").addEventListener("click", closeModal);
+    dialog.querySelectorAll(".vt").forEach(function (btn) {
+      btn.addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        dialog.querySelectorAll(".vt").forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        var v = btn.getAttribute("data-vt");
+        dialog.querySelectorAll(".viewpane").forEach(function (p) {
+          p.hidden = p.getAttribute("data-pane") !== v;
+        });
+      });
+    });
   }
 
   function closeModal() {
