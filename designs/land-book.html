@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>04 — Land Book · The SaaS Ad Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--base:#F7F8F6;--ink:#191412;--mut:#6E6963;--line:#E3E0D9;--accent:#215A6D;--tint:#DCE9EE;--tint2:#EAF2F5;--dark:#191412}
+body{background:var(--base);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a.back{position:fixed;top:16px;left:16px;z-index:70;font-size:11px;letter-spacing:.08em;color:var(--ink);text-decoration:none;opacity:.6}
+.d{font-family:"Space Grotesk",Inter,sans-serif}
+.micro{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);font-weight:500}
+/* sticky mini nav */
+nav{position:sticky;top:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:16px 32px;background:rgba(247,248,246,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .logo{font-family:"Space Grotesk";font-weight:700;font-size:17px;letter-spacing:-.01em}
+nav .logo em{font-style:normal;color:var(--accent)}
+nav .links{display:flex;gap:26px;align-items:center}
+nav .links a{font-size:14px;font-weight:500;color:var(--ink);text-decoration:none}
+nav .links a.hot{background:var(--ink);color:#fff;border-radius:100px;padding:11px 26px}
+/* sticky floating pill */
+.cta-bar{position:fixed;bottom:18px;left:50%;transform:translate(-50%,120px);z-index:65;display:flex;gap:14px;align-items:center;background:rgba(25,20,18,.9);backdrop-filter:blur(14px);border-radius:100px;padding:9px 9px 9px 22px;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.cta-bar.show{transform:translate(-50%,0)}
+.cta-bar span{font-size:13px;color:#fff;opacity:.85}
+.cta-bar a{background:var(--accent);color:#fff;border-radius:100px;padding:11px 24px;font-size:13px;font-weight:600;text-decoration:none}
+/* hero: split content left / mini-app right */
+.hero{max-width:1280px;margin:0 auto;padding:110px 40px 90px;display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
+.badge{display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--line);border-radius:100px;padding:9px 20px;color:var(--mut);margin-bottom:30px;background:#fff}
+.hero h1{font-family:"Space Grotesk";font-weight:700;font-size:clamp(3rem,6.2vw,5.6rem);letter-spacing:-.03em;line-height:1.0}
+.hero h1 .acc{color:var(--accent)}
+.hero p.lede{color:var(--mut);font-size:17px;max-width:52ch;margin:26px 0 36px;line-height:1.65}
+.hero .row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{background:var(--ink);color:#fff;border:none;border-radius:100px;padding:16px 34px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;transition:transform .25s}
+.btn:hover{transform:scale(1.03)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+/* interactive mini-widget in hero */
+.widget{background:var(--dark);border-radius:28px;padding:10px;color:#fff;position:relative;box-shadow:0 40px 80px -30px rgba(25,20,18,.35)}
+.widget .chrome{display:flex;gap:8px;padding:14px 16px 6px}
+.widget .chrome i{width:11px;height:11px;border-radius:50%;background:#3a332e;display:block}
+.widget .chrome i:first-child{background:#E76F51}
+.widget .screen{padding:12px 16px 18px}
+.widget .slabel{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:10px}
+.widget .srow{display:flex;gap:8px;margin-bottom:12px}
+.widget input{flex:1;background:#262019;border:1px solid #3a332e;color:#fff;border-radius:12px;padding:12px 16px;font-size:14px;font-family:Inter;outline:none}
+.widget input:focus{border-color:var(--accent)}
+.widget .wchips{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.widget .wchips button{background:transparent;border:1px solid #3a332e;color:#cfc9c2;border-radius:100px;padding:8px 16px;font-size:12.5px;cursor:pointer;font-family:Inter}
+.widget .wchips button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.widget .wres{border-top:1px solid #3a332e;min-height:150px}
+.widget .wrow{display:flex;justify-content:space-between;gap:12px;padding:12px 4px;border-bottom:1px solid #2a251f;font-size:13.5px}
+.widget .wrow b{font-weight:600}
+.widget .wrow span{opacity:.55;font-size:12px;white-space:nowrap}
+.widget .wfoot{padding:14px 4px 4px;font-size:12px;opacity:.5;letter-spacing:.06em}
+/* floating glass chips */
+.chip{position:absolute;background:rgba(255,255,255,.72);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.9);border-radius:100px;padding:10px 20px;font-size:12.5px;font-weight:600;box-shadow:0 16px 40px -12px rgba(25,20,18,.25);white-space:nowrap;z-index:3}
+.chip.c1{top:-24px;right:8%;color:var(--accent)}
+.chip.c2{bottom:-22px;left:6%}
+.chip.c1 i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#4CAF7D;margin-right:8px}
+/* section scaffolding */
+section{max-width:1280px;margin:0 auto;padding:96px 40px}
+.rule{border-top:1px solid var(--line);padding-top:26px;margin-bottom:44px;display:flex;justify-content:space-between;align-items:center}
+h2{font-family:"Space Grotesk";font-weight:700;font-size:clamp(2.4rem,5vw,4.4rem);letter-spacing:-.03em;line-height:1.02;margin-bottom:16px;max-width:16ch}
+h2 .acc{color:var(--accent)}
+h2 .it{font-style:italic;font-weight:500}
+.sec-sub{color:var(--mut);font-size:16px;max-width:62ch;line-height:1.65;margin-bottom:52px}
+/* accent-tinted bento panel */
+.tintbox{background:linear-gradient(180deg,var(--tint),var(--tint2));border-radius:36px;padding:64px 56px}
+.feat3{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(33,90,109,.25)}
+.feat{padding:36px 32px 8px;border-left:1px solid rgba(33,90,109,.25)}
+.feat:first-child{border-left:none;padding-left:0}
+.feat .q{font-family:"Space Grotesk";font-size:21px;font-weight:700;line-height:1.35;letter-spacing:-.01em;margin:14px 0 10px}
+.feat p{font-size:14.5px;color:var(--mut);line-height:1.65}
+.feat .ic{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:14px;background:var(--accent);color:#fff;font-family:"Space Grotesk";font-weight:700;font-size:17px}
+/* dark interlude band with scroll-fill */
+.interlude{background:var(--dark);color:#fff;margin:40px 0;padding:150px 40px;text-align:center}
+.interlude .micro{color:rgba(255,255,255,.45);margin-bottom:36px;display:block}
+#filltext{font-family:"Space Grotesk";font-weight:700;font-size:clamp(2rem,5.4vw,4.6rem);letter-spacing:-.02em;line-height:1.25;max-width:20ch;margin:0 auto}
+#filltext span{color:#4a443c;transition:color .1s linear}
+/* library cards */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.filters button{font-size:13.5px;font-weight:500;padding:11px 24px;border-radius:100px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;font-family:Inter;transition:all .25s}
+.filters button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cell{background:#fff;border:1px solid var(--line);border-radius:28px;padding:34px;display:flex;flex-direction:column;gap:12px;min-height:270px;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.cell:hover{transform:translateY(-6px);box-shadow:0 30px 60px -24px rgba(33,90,109,.25)}
+.cell.big{grid-column:span 2;background:var(--tint2);border-color:rgba(33,90,109,.3)}
+.cell .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.cell h3{font-family:"Space Grotesk";font-size:23px;font-weight:600;letter-spacing:-.015em;line-height:1.3}
+.cell p{font-size:14.5px;color:var(--mut);line-height:1.65}
+.cell .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:16px;font-size:12.5px;color:var(--mut)}
+.cell .cta{color:var(--accent);font-weight:600}
+/* playbook rows with hairline dividers */
+.plist{border-top:1px solid var(--line)}
+.prow{display:grid;grid-template-columns:80px 1fr 1.4fr;gap:32px;padding:34px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.prow .n{font-family:"Space Grotesk";font-size:13px;letter-spacing:.1em;color:var(--accent);font-weight:600}
+.prow h4{font-family:"Space Grotesk";font-size:22px;font-weight:700;letter-spacing:-.015em}
+.prow p{font-size:14.5px;color:var(--mut);line-height:1.65;max-width:52ch}
+.prow p b{color:var(--ink);font-weight:600}
+/* dark closing CTA + giant footer wordmark */
+.closing{background:var(--dark);color:#fff;border-radius:44px;margin:40px auto;max-width:1280px;padding:110px 56px;display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center}
+.closing h2{color:#fff;max-width:12ch}
+.closing p{color:rgba(255,255,255,.65);font-size:16px;line-height:1.65;margin-bottom:32px;max-width:44ch}
+.closing .btn{background:var(--accent)}
+.closing .side{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:32px}
+.closing .side .slabel{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:16px}
+.closing .side li{list-style:none;font-size:14.5px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.85)}
+.closing .side li:last-child{border-bottom:none}
+footer{background:var(--dark);color:#fff;padding:60px 40px 30px;overflow:hidden}
+footer .word{font-family:"Space Grotesk";font-weight:700;font-size:clamp(4rem,17.5vw,17rem);letter-spacing:-.04em;line-height:.95;text-align:center;color:#fff;margin-bottom:44px}
+footer .word .acc{color:var(--accent)}
+footer .cols{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.14);padding-top:26px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media(max-width:980px){.hero{grid-template-columns:1fr}.feat3{grid-template-columns:1fr}.feat{border-left:none;border-top:1px solid rgba(33,90,109,.25);padding:28px 0}.feat:first-child{border-top:none}.bento{grid-template-columns:1fr}.cell.big{grid-column:span 1}.prow{grid-template-columns:1fr;gap:10px}.closing{grid-template-columns:1fr;margin:20px}.chip{display:none}}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← INDEX</a>
+
+<nav>
+  <div class="logo d">ADLIB<em>·04</em></div>
+  <div class="links"><a href="#library">Library</a><a href="#playbook">Playbook</a><a class="hot" href="#library">Browse the library</a></div>
+</nav>
+
+<div class="cta-bar" id="ctabar"><span>61 winning ads, verbatim copy.</span><a href="#library">Browse the library</a></div>
+
+<header class="hero">
+  <div>
+    <div class="badge">Direction 04 — Land Book · Premium landing</div>
+    <h1>61 SaaS ads.<br>One page that <span class="acc">converts</span> the research.</h1>
+    <p class="lede">46 paid ads with verbatim Meta Ad Library copy, 15 organic posts. Longest active run wins — advertisers don't fund losers. Try the live mini-demo: filter the highlights.</p>
+    <div class="row"><a class="btn" href="#library">Browse the library</a><a class="btn ghost" href="#playbook">See the playbook</a></div>
+  </div>
+  <div class="widget" id="widget">
+    <div class="chip c1" data-speed="0.06"><i></i>LIVE DEMO</div>
+    <div class="chip c2" data-speed="-0.05">8 of 61 highlighted</div>
+    <div class="chrome"><i></i><i></i><i></i></div>
+    <div class="screen">
+      <div class="slabel">Filter the highlights</div>
+      <div class="srow"><input id="wq" type="text" placeholder="Try “AI headshots”…"></div>
+      <div class="wchips" id="wchips">
+        <button class="on" data-f="all">All</button><button data-f="paid">Paid</button><button data-f="organic">Organic</button><button data-f="AI tools">AI tools</button>
+      </div>
+      <div class="wres" id="wres"></div>
+      <div class="wfoot" id="wfoot"></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="tintbox">
+    <div class="rule" style="border-top:none;padding-top:0"><span class="micro">Why this page works</span><span class="micro">3 devices</span></div>
+    <div class="feat3">
+      <div class="feat rv"><span class="ic">▦</span><div class="q">“Show me HeadshotPro's <b>exact</b> words.”</div><p>Verbatim copy, not summaries. Every card quotes the ad that is still spending.</p></div>
+      <div class="feat rv"><span class="ic">◷</span><div class="q">“Sort by <b>longest run</b>, not likes.”</div><p>Meta publishes no CTR. Run duration since Feb 27, 2026 is the only public proof of spend.</p></div>
+      <div class="feat rv"><span class="ic">✎</span><div class="q">“Give me the <b>steal-this</b> line.”</div><p>Each entry ends with one tactic to ship this week — checklist copy, conquest angles, free-guide offers.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="interlude">
+  <span class="micro">The thesis</span>
+  <p id="filltext">Most ads die in a week. The ones that don't are the playbook. Scroll to watch it fill in.</p>
+</div>
+
+<section id="library">
+  <div class="rule"><span class="micro">01 — The library</span><span class="micro">8 highlighted of 61</span></div>
+  <h2 class="rv">What's <span class="acc">actually</span> running.</h2>
+  <p class="sec-sub rv">Recorded verbatim from the Meta Ad Library on September 18, 2026. Filter by paid, organic, or category.</p>
+  <div class="filters rv" id="filters">
+    <button class="on" data-f="all">All</button><button data-f="paid">Paid</button><button data-f="organic">Organic</button>
+    <button data-f="AI tools">AI tools</button><button data-f="marketing">Marketing</button><button data-f="productivity">Productivity</button><button data-f="design">Design</button>
+  </div>
+  <div class="bento" id="bento"></div>
+</section>
+
+<section id="playbook">
+  <div class="rule"><span class="micro">02 — The playbook</span><span class="micro">4 patterns</span></div>
+  <h2 class="rv">Steal what <span class="it">already</span> runs.</h2>
+  <p class="sec-sub rv">No theory. Each pattern is tied to a specific ad still spending money.</p>
+  <div class="plist">
+    <div class="prow rv"><span class="n">01</span><h4>Longevity = proof</h4><p>HeadshotPro's ad has run since <b>Feb 27, 2026</b> — the longest verified run in the set. Meta shows no CTR, so run-time is the only public signal of spend.</p></div>
+    <div class="prow rv"><span class="n">02</span><h4>Checklist copy</h4><p><b>“100% online. No appointments. 2 hours or less.”</b> Every line kills one objection before it forms.</p></div>
+    <div class="prow rv"><span class="n">03</span><h4>Name the enemy</h4><p>Monday.com targets <b>Airtable users directly</b>. ClickUp: “One app instead of ten.” Conquest copy converts.</p></div>
+    <div class="prow rv"><span class="n">04</span><h4>Free the playbook</h4><p>HubSpot's <b>free Instagram guide</b> has run since March. The offer is the ad.</p></div>
+  </div>
+</section>
+
+<div class="closing rv">
+  <div>
+    <h2>Pick a direction. <span class="acc">Ship the library.</span></h2>
+    <p>This is direction 04 of 10. The full gallery shows the same 61 ads in nine more visual systems — brutalist, editorial, SaaS-dark, and more.</p>
+    <a class="btn" href="index.html">Back to all 10 directions</a>
+  </div>
+  <div class="side">
+    <div class="slabel">What's inside</div>
+    <ul>
+      <li>46 paid ads · verbatim copy · run dates</li>
+      <li>15 organic posts · format breakdowns</li>
+      <li>Pattern playbook mapped to 5 products</li>
+      <li>Filters: paid / organic / category / search</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div class="word d">ADLIB<span class="acc">·04</span></div>
+  <div class="cols"><span>Direction 04 — Land Book</span><span>Research · Sep 18 2026</span><span>Back to <a href="index.html" style="color:#fff">index</a></span></div>
+</footer>
+
+<script>
+const ADS=[
+{b:"HeadshotPro",t:"paid",c:"AI tools",big:1,h:"Best AI Headshots 🏆",x:"Professional business headshots, done for you in 2 hours or less. 100% online, no appointments, full refund guarantee.",cta:"Learn more",r:"Since Feb 27, 2026 · longest run"},
+{b:"HubSpot",t:"paid",c:"marketing",h:"Free Instagram Strategies",x:"Ready to see ROI on your Instagram posts? Get our free guide to Instagram for business.",cta:"Get offer",r:"Since Mar 24, 2026"},
+{b:"Notion",t:"paid",c:"productivity",h:"Solve Work with Notion.",x:"Custom AI Agents automate your work — weekly reports to ticket triage — on triggers you set.",cta:"Sign up",r:"Since Aug 5, 2026"},
+{b:"Semrush",t:"paid",c:"marketing",h:"Don't disappear in AI",x:"AI now reads Reddit, LinkedIn, and reviews too — not just your website.",cta:"Learn more",r:"Since Jun 5, 2026"},
+{b:"Canva",t:"paid",c:"design",h:"Try Canva Magic Layers",x:"Slice any flat image into a fully editable design.",cta:"Learn more",r:"Since Jun 5, 2026"},
+{b:"Monday.com",t:"paid",c:"productivity",h:"Upgrade from Airtable",x:"Why settle for Airtable? More power, flexibility, and speed. Try it free.",cta:"Sign up",r:"Since Sep 7, 2026"},
+{b:"Duolingo",t:"organic",c:"marketing",h:"The unhinged owl",x:"Mascot chaos content — threatens and roasts followers into doing lessons.",cta:"Follow",r:"Organic · Feb 2025 stunt"},
+{b:"Descript",t:"organic",c:"marketing",h:"How it started vs. going",x:"Meme-reel arc: scrappy beginnings to polished product. Built for shares.",cta:"Follow",r:"Organic · meme format"}
+];
+const bent=document.getElementById('bento');
+ADS.forEach(a=>{
+  const d=document.createElement('div');d.className='cell rv'+(a.big?' big':'');d.dataset.t=a.t;d.dataset.c=a.c;
+  d.innerHTML=`<div class="tag">${a.t} · ${a.c}</div><h3>${a.b} — “${a.h}”</h3><p>${a.x}</p><div class="foot"><span>${a.r}</span><span class="cta">${a.cta} →</span></div>`;
+  bent.appendChild(d);
+});
+document.getElementById('filters').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('on'));
+  e.target.classList.add('on');const f=e.target.dataset.f;
+  document.querySelectorAll('.cell').forEach(c=>{c.style.display=(f==='all'||c.dataset.t===f||c.dataset.c===f)?'flex':'none'});
+});
+/* hero mini-widget */
+const wq=document.getElementById('wq'),wres=document.getElementById('wres'),wfoot=document.getElementById('wfoot');
+let wf='all';
+function wrender(){
+  const q=wq.value.trim().toLowerCase();
+  const list=ADS.filter(a=>(wf==='all'||a.t===wf||a.c===wf)&&(!q||(a.b+' '+a.h+' '+a.x).toLowerCase().includes(q)));
+  wres.innerHTML=list.length?list.slice(0,4).map(a=>`<div class="wrow"><b>${a.b}</b><span>${a.r.split('·')[0].trim()}</span></div>`).join(''):'<div class="wrow"><span>No matches — try “AI”.</span></div>';
+  wfoot.textContent=`${list.length} of 8 highlighted · 61 total in library`;
+}
+wq.addEventListener('input',wrender);
+document.getElementById('wchips').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#wchips button').forEach(b=>b.classList.remove('on'));
+  e.target.classList.add('on');wf=e.target.dataset.f;wrender();
+});
+wrender();
+/* scroll-fill statement */
+const ft=document.getElementById('filltext');
+ft.innerHTML=ft.textContent.trim().split(/\s+/).map(w=>`<span>${w}</span>`).join(' ');
+const words=ft.querySelectorAll('span');
+(function fillLoop(){
+  const r=ft.getBoundingClientRect();
+  const p=Math.min(1,Math.max(0,(innerHeight*0.75-r.top)/(r.height*0.9)));
+  words.forEach((w,i)=>{w.style.color=(i/words.length)<p?'#ffffff':'#4a443c'});
+  requestAnimationFrame(fillLoop);
+})();
+/* chip parallax */
+const chips=document.querySelectorAll('.chip');
+addEventListener('scroll',()=>{
+  document.getElementById('ctabar').classList.toggle('show',scrollY>700);
+  const y=scrollY;
+  chips.forEach(c=>{c.style.transform=`translateY(${y*parseFloat(c.dataset.speed)}px)`});
+},{passive:true});
+/* reveals */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
