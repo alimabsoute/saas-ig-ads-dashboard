@@ -38,7 +38,7 @@ section{padding:15vw 4.8vw}
 .card .meta{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
 .card h3{font-size:21px;font-weight:600;letter-spacing:-.025em;line-height:1.15}
 .card .copy{font-size:14px;line-height:1.55;color:#3a3c3e;letter-spacing:-.01em}
-.card .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#6a6c6e}
+.card .foot{margin-top:auto;display:flex;gap:14px;justify-content:space-between;align-items:center;font-size:12px;color:#6a6c6e}
 .card .cta{font-size:12px;font-weight:600;color:var(--blue)}
 .patterns{background:var(--ink);color:var(--bg);border-radius:32px;margin:0 24px;padding:100px 48px}
 .patterns .eyebrow{color:#8ab8ff}
@@ -69,7 +69,7 @@ footer{padding:80px 4.8vw 40px;display:flex;justify-content:space-between;font-s
 </header>
 
 <section id="library">
-  <div class="sec-head reveal"><h2>The library</h2><span>8 of 61 shown · filter to slice</span></div>
+  <div class="sec-head reveal"><h2>The library</h2><span id="countlabel">8 of 61 shown · filter to slice</span></div>
   <div class="filters reveal" id="filters">
     <button class="on" data-f="all">All</button>
     <button data-f="paid">Paid</button>
@@ -120,9 +120,13 @@ document.getElementById('filters').addEventListener('click',e=>{
   document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('on'));
   e.target.classList.add('on');
   const f=e.target.dataset.f;
+  let n=0;
   document.querySelectorAll('.card').forEach(c=>{
-    c.style.display=(f==='all'||c.dataset.t===f||c.dataset.c===f)?'flex':'none';
+    const show=(f==='all'||c.dataset.t===f||c.dataset.c===f);
+    c.style.display=show?'flex':'none';
+    if(show)n++;
   });
+  document.getElementById('countlabel').textContent=n+' of 61 shown · filter to slice';
 });
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%5*0.04)+'s';io.observe(el)});
