@@ -177,10 +177,14 @@
     var tags = (e.hashtags || []).map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("");
     var acct = e.account ? ' <span class="acct">' + esc(e.account) + "</span>" : "";
     var libLine = e.library_id ? rowHtml("Ad ID", "Meta Ad Library ID " + e.library_id) : "";
+    var nativeImg = (e.has_native && e.native_file) 
+      ? '<div class="native-creative"><img src="' + esc(e.native_file) + '" alt="Native ad creative for ' + esc(e.brand) + '" loading="lazy"></div>'
+      : "";
     return (
       '<div class="card-top"><div><span class="brand">' + esc(e.brand) + "</span>" + acct + "</div>" +
       '<span class="badge ' + badgeClass(e.size) + '">' + esc(e.size) + "</span></div>" +
       '<div class="chips"><span class="chip">' + esc(e.category) + '</span><span class="chip">' + esc(cap(e.format)) + "</span></div>" +
+      nativeImg +
       '<p class="hook">' + esc(e.hook) + "</p>" +
       '<p class="copy' + (full ? "" : " clamp") + '">' + esc(e.copy) + "</p>" +
       '<dl class="rows">' +
