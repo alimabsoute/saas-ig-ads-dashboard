@@ -54,15 +54,6 @@
       "Serve this folder over http(s) (e.g. GitHub Pages) or keep <code>assets/data.js</code> next to <code>index.html</code>.</div></div>");
   }
 
-  if (window.DASHBOARD_DATA && window.DASHBOARD_DATA.length) {
-    boot(window.DASHBOARD_DATA);
-  } else {
-    fetch("assets/data.json").then(function (r) {
-      if (!r.ok) throw new Error("http " + r.status);
-      return r.json();
-    }).then(boot).catch(showError);
-  }
-
   /* ---------------- tabs ---------------- */
 
   function wireTabs(data) {
@@ -476,9 +467,9 @@
       "<h3>Steal this for your products</h3><p>Each pattern below is mapped to one of Ali's live products — inkspell, oporae, ai-pulse, forkfox, free-tools-atlas — with a concrete move to run.</p></div>";
     STEAL.forEach(function (s, si) {
       html += '<div class="pat-row steal"><div class="no">S' + (si + 1) + "</div>" +
-        "<h3>" + s[0] + "</h3><p><strong>" + s[1] + "</strong><br>";
-      s[2].forEach(function (pair) {
-        html += "<em>" + pair[0] + ":</em> " + pair[1] + "<br>";
+        "<h3>" + esc(s.name) + "</h3><p>";
+      (s.rows || []).forEach(function (pair) {
+        html += "<em>" + esc(pair[0]) + ":</em> " + esc(pair[1]) + "<br>";
       });
       html += "</p></div>";
     });
@@ -520,4 +511,15 @@
 
   countUp();
   wireReveal();
+
+  /* ---------------- boot (last: needs PATTERNS/STEAL defined above) ---------------- */
+
+  if (window.DASHBOARD_DATA && window.DASHBOARD_DATA.length) {
+    boot(window.DASHBOARD_DATA);
+  } else {
+    fetch("assets/data.json").then(function (r) {
+      if (!r.ok) throw new Error("http " + r.status);
+      return r.json();
+    }).then(boot).catch(showError);
+  }
 })();
