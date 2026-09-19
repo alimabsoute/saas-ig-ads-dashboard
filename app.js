@@ -428,21 +428,52 @@
   ];
 
   function renderPatterns() {
-    var html = '<div class="playbook"><h2>The Playbook — patterns across winners</h2>' +
-      "<p style='color:var(--muted);font-size:14px;margin:6px 0 0'>Aggregated from all 61 examples. Hooks, angles, formats, and CTAs that keep showing up.</p>";
-    PATTERNS.forEach(function (p) {
-      html += "<h3>" + esc(p.title) + "</h3><ul>" +
-        p.items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</ul>";
-    });
-    html += "</div>";
-    html += '<div class="playbook"><h2>Steal this for your products</h2>' +
-      "<p style='color:var(--muted);font-size:14px;margin:6px 0 14px'>The 6 strongest patterns, mapped to your products with one concrete angle each.</p></div>";
-    STEAL.forEach(function (s) {
-      html += '<div class="steal"><h4><span class="n">' + s.n + "</span>" + esc(s.name) + "</h4>" +
-        '<table><thead><tr><th>Product</th><th>Angle to steal</th></tr></thead><tbody>' +
-        s.rows.map(function (r) { return "<tr><td>" + esc(r[0]) + "</td><td>" + esc(r[1]) + "</td></tr>"; }).join("") +
-        "</tbody></table></div>";
+    var html = "";
+    PATTERNS.forEach(function (p, pi) {
+      p.items.forEach(function (item, ii) {
+        var m = item.match(/^<strong>(.*?)<\/strong>\s*([\s\S]*)$/);
+        var t = m ? m[1] : p.title;
+        var b = m ? m[2] : item;
+        html += '<div class="pat-row"><div class="no">' + String(pi + 1).padStart(2, "0") + "." + (ii + 1) + "</div>" +
+          "<h3>" + t + "</h3><p>" + b + "</p></div>";
+      });
     });
     document.getElementById("patterns").innerHTML = html;
   }
+
+  /* ---------------- godly chrome: count-up + reveal ---------------- */
+
+  function countUp() {
+    document.querySelectorAll(".stat .n[data-count]").forEach(function (el) {
+      var target = parseInt(el.getAttribute("data-count"), 10) || 0;
+      var t0 = null, dur = 1400;
+      function step(ts) {
+        if (!t0) t0 = ts;
+        var k = Math.min(1, (ts - t0) / dur);
+        var eased = 1 - Math.pow(1 - k, 3);
+        el.textContent = Math.round(target * eased);
+        if (k < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  function wireReveal() {
+    if (!("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.06 });
+    var mo = new MutationObserver(function () {
+      document.querySelectorAll("#grid-paid .card:not(.reveal), #grid-organic .card:not(.reveal)").forEach(function (c) {
+        c.classList.add("reveal");
+        io.observe(c);
+      });
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+
+  countUp();
+  wireReveal();
 })();
