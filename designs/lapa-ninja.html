@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>08 — Lapa Ninja · The SaaS Ad Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#08090A;--card:#0E0E11;--ink:#FFFFFF;--sec:#8A8F98;--lead:#9CA3AF;--line:rgba(255,255,255,.1);--mint:#00C47E;--mono:"JetBrains Mono",ui-monospace,monospace}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a.back{position:fixed;top:52px;left:16px;z-index:70;font-size:11px;letter-spacing:.08em;color:var(--ink);text-decoration:none;opacity:.55}
+/* announcement bar */
+.abar{background:rgba(0,196,126,.1);border-bottom:1px solid rgba(0,196,126,.25);color:#fff;font-size:13px;text-align:center;padding:11px 40px 11px 16px;position:relative}
+.abar b{color:var(--mint);font-weight:600}
+.abar button{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--sec);font-size:16px;cursor:pointer}
+/* nav */
+nav{position:sticky;top:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:15px 40px;background:rgba(8,9,10,.72);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+nav .logo{font-weight:700;font-size:16px;letter-spacing:-.01em}
+nav .logo em{font-style:normal;color:var(--mint)}
+nav .links{display:flex;gap:28px;align-items:center}
+nav .links a{font-size:14px;font-weight:500;color:var(--sec);text-decoration:none;transition:color .2s}
+nav .links a:hover{color:#fff}
+nav .links a.hot{background:#fff;color:#08090A;border-radius:100px;padding:11px 26px;font-weight:600}
+/* hero */
+.hero{position:relative;max-width:1280px;margin:0 auto;padding:110px 40px 60px;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-180px;right:-120px;width:640px;height:640px;background:radial-gradient(circle,rgba(0,196,126,.16),transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(700px 420px at 70% 0%,#000,transparent 75%);pointer-events:none}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin-bottom:24px;position:relative;z-index:2}
+.hero h1{font-size:clamp(3rem,6.5vw,6rem);font-weight:600;letter-spacing:-.03em;line-height:1.06;max-width:14ch;position:relative;z-index:2}
+.hero h1 .gray{color:var(--lead)}
+.hero h1 .acc{color:var(--mint)}
+.sub{font-size:18px;color:var(--sec);max-width:60ch;margin:28px 0 40px;line-height:1.6;position:relative;z-index:2}
+.sub b{color:#fff;font-weight:600}
+.ctas{display:flex;gap:14px;flex-wrap:wrap;position:relative;z-index:2}
+.btn{background:#fff;color:#08090A;border:none;border-radius:100px;padding:16px 36px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn.ghost{background:transparent;color:#fff;border:1px solid var(--line)}
+.btn.ghost .dot{width:8px;height:8px;border-radius:50%;background:var(--mint)}
+/* logo wall */
+.wall{margin-top:64px;position:relative;z-index:2}
+.wall .cap{font-size:13px;color:var(--sec);margin-bottom:16px}
+.wallgrid{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.wcell{padding:22px 10px;text-align:center;font-size:13px;font-weight:600;color:var(--sec);border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:all .25s;letter-spacing:.02em}
+.wcell:nth-child(6n){border-right:none}
+.wcell:nth-child(n+7){border-bottom:none}
+.wcell:hover{color:var(--mint);background:rgba(0,196,126,.05)}
+/* browser-chrome product visual */
+.browser{margin-top:56px;border:1px solid var(--line);border-radius:16px;background:var(--card);position:relative;z-index:2;box-shadow:0 60px 100px -40px rgba(0,0,0,.8)}
+.browser .bar{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.browser .dots{display:flex;gap:7px}
+.browser .dots i{width:11px;height:11px;border-radius:50%;background:#2a2c31;display:block}
+.browser .url{flex:1;background:#08090A;border:1px solid var(--line);border-radius:8px;font-family:var(--mono);font-size:12px;color:var(--sec);padding:8px 16px}
+.browser .rows{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.brow{background:var(--card);padding:28px}
+.brow .rtag{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--mint);text-transform:uppercase;margin-bottom:10px}
+.brow h4{font-size:17px;font-weight:600;letter-spacing:-.01em;margin-bottom:8px}
+.brow p{font-size:13.5px;color:var(--sec);line-height:1.6}
+/* sections */
+section{max-width:1280px;margin:0 auto;padding:96px 40px}
+.seceye{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin-bottom:20px}
+h2{font-size:clamp(2.2rem,4.6vw,3.8rem);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px;max-width:18ch}
+h2 .gray{color:var(--lead)}
+.sec-sub{color:var(--sec);font-size:16px;max-width:62ch;line-height:1.6;margin-bottom:48px}
+/* stat proof cards */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:36px}
+.stat .big{font-size:64px;font-weight:600;letter-spacing:-.04em;color:#fff;line-height:1}
+.stat .big em{font-style:normal;color:var(--mint)}
+.stat p{color:var(--sec);font-size:14px;margin-top:12px;line-height:1.6}
+.stat a{color:var(--mint);font-size:13px;font-weight:600;text-decoration:none;display:inline-block;margin-top:10px}
+/* filter chips */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.filters button{font-size:13.5px;font-weight:500;padding:11px 24px;border-radius:100px;border:1px solid var(--line);background:transparent;color:var(--sec);cursor:pointer;font-family:Inter;transition:all .25s}
+.filters button.on{background:#fff;color:#08090A;border-color:#fff;font-weight:600}
+/* ad cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px;display:flex;flex-direction:column;gap:12px;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-5px);border-color:rgba(0,196,126,.4)}
+.card.big{grid-column:span 2}
+.card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sec);display:flex;align-items:center;gap:8px}
+.card .tag .vcheck{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--mint);color:#08090A;font-size:11px;font-weight:700}
+.card h3{font-size:21px;font-weight:600;letter-spacing:-.015em;line-height:1.3}
+.card p{font-size:14px;color:var(--sec);line-height:1.65}
+.card .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:16px;font-size:12px;color:var(--sec);font-family:var(--mono)}
+.card .go{color:var(--mint);font-weight:600}
+/* playbook rows */
+.plist{border-top:1px solid var(--line)}
+.prow{display:grid;grid-template-columns:110px 1fr 1.4fr;gap:32px;padding:34px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.prow .n{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--mint)}
+.prow h4{font-size:21px;font-weight:600;letter-spacing:-.015em}
+.prow p{font-size:14.5px;color:var(--sec);line-height:1.65;max-width:54ch}
+.prow p b{color:#fff;font-weight:600}
+/* final cta */
+.final{max-width:1280px;margin:40px auto;padding:0 40px}
+.finalbox{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:90px 56px;text-align:center;position:relative;overflow:hidden}
+.finalbox::before{content:"";position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(circle,rgba(0,196,126,.14),transparent 65%);pointer-events:none}
+.finalbox h2{max-width:none;position:relative}
+.finalbox p{color:var(--sec);font-size:16px;margin:18px 0 38px;position:relative}
+.finalbox .btn{background:var(--mint);color:#06231a;position:relative}
+footer{max-width:1280px;margin:0 auto;padding:40px;display:flex;justify-content:space-between;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--sec)}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media(max-width:980px){.cards,.stats{grid-template-columns:1fr}.card.big{grid-column:span 1}.wallgrid{grid-template-columns:repeat(3,1fr)}.wcell:nth-child(6n){border-right:1px solid var(--line)}.wcell:nth-child(3n){border-right:none}.browser .rows{grid-template-columns:1fr}.prow{grid-template-columns:1fr;gap:10px}}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← INDEX</a>
+
+<div class="abar" id="abar"><b>New</b> — September 2026 edition: 24 fresh Meta Ad Library ads logged, verbatim copy + run dates. <button id="abarx" aria-label="dismiss">×</button></div>
+
+<nav>
+  <div class="logo">ADLIB<em>/</em>08</div>
+  <div class="links"><a href="#library">Library</a><a href="#playbook">Playbook</a><a class="hot" href="#library">Browse the library</a></div>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">01 — The SaaS ad library · Direction 08</div>
+  <h1><span class="gray">Every winning SaaS ad on Instagram,</span> verbatim, dated, <span class="acc">stealable.</span></h1>
+  <p class="sub"><b>61 entries</b> — 46 paid ads recorded from the Meta Ad Library plus 15 organic posts — with the exact words that ran and the dates they ran. Longest active run wins.</p>
+  <div class="ctas"><a class="btn" href="#library">Browse the library</a><a class="btn ghost" href="#playbook"><span class="dot"></span>See the playbook</a></div>
+
+  <div class="wall">
+    <div class="cap">TRUSTED BY TEAMS THAT RUN IG ADS</div>
+    <div class="wallgrid">
+      <div class="wcell">HEADSHOTPRO</div><div class="wcell">HUBSPOT</div><div class="wcell">NOTION</div><div class="wcell">SEMRUSH</div><div class="wcell">CANVA</div><div class="wcell">CLICKUP</div>
+    </div>
+  </div>
+
+  <div class="browser">
+    <div class="bar"><div class="dots"><i></i><i></i><i></i></div><div class="url">meta.adlibrary — 61 ads, september 2026</div></div>
+    <div class="rows">
+      <div class="brow"><div class="rtag">Paid · AI tools</div><h4>HeadshotPro — “Best AI Headshots”</h4><p>100% online. No appointments. 2 hours or less. Running since Feb 27, 2026.</p></div>
+      <div class="brow"><div class="rtag">Paid · Marketing</div><h4>HubSpot — “Free Instagram Strategies”</h4><p>Get our free guide to Instagram for business. Running since Mar 24, 2026.</p></div>
+      <div class="brow"><div class="rtag">Paid · Productivity</div><h4>Notion — “Solve Work with Notion”</h4><p>Custom AI Agents automate your work on triggers you set. Since Aug 5, 2026.</p></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="seceye">The numbers</div>
+  <h2 class="rv"><span class="gray">Why trust it.</span> It's all public.</h2>
+  <p class="sec-sub rv">Meta publishes no CTR or ROAS. Run duration is the only public signal of spend — so the library sorts by it.</p>
+  <div class="stats">
+    <div class="stat rv"><div class="big">46<em>×</em></div><p>Paid ads with verbatim copy and verified run dates, pulled from the Meta Ad Library on Sep 18, 2026.</p><a href="#library">Browse the paid set →</a></div>
+    <div class="stat rv"><div class="big">15</div><p>Organic posts from the same brands — the formats they post when they're not paying.</p><a href="#library">Browse the organic set →</a></div>
+    <div class="stat rv"><div class="big">Feb <em>’26</em></div><p>HeadshotPro's ad start date — the longest verified run in the library. Spend that survives this long is a signal.</p><a href="#playbook">How we score ads →</a></div>
+  </div>
+</section>
+
+<section id="library">
+  <div class="seceye">02 — The library</div>
+  <h2 class="rv"><span class="gray">What's running</span> right now.</h2>
+  <p class="sec-sub rv">9 highlighted entries from the 61. Filter by paid, organic, or category — mint checks mark verified paid runs.</p>
+  <div class="filters rv" id="filters">
+    <button class="on" data-f="all">All</button><button data-f="paid">Paid ads</button><button data-f="organic">Organic</button>
+    <button data-f="AI tools">AI tools</button><button data-f="marketing">Marketing</button><button data-f="productivity">Productivity</button><button data-f="design">Design</button>
+  </div>
+  <div class="cards" id="cards"></div>
+</section>
+
+<section id="playbook">
+  <div class="seceye">03 — The playbook</div>
+  <h2 class="rv"><span class="gray">Four patterns,</span> zero theory.</h2>
+  <p class="sec-sub rv">Each pattern is tied to a specific ad that is still spending money.</p>
+  <div class="plist">
+    <div class="prow rv"><span class="n">P.01</span><h4>Run-time = proof</h4><p>HeadshotPro's ad has run since <b>Feb 27, 2026</b>. Meta hides CTR — spend duration is the tell.</p></div>
+    <div class="prow rv"><span class="n">P.02</span><h4>Checklist copy</h4><p><b>“100% online. No appointments. 2 hours or less.”</b> Every line deletes an objection.</p></div>
+    <div class="prow rv"><span class="n">P.03</span><h4>Name the enemy</h4><p>Monday.com targets <b>Airtable users</b>. ClickUp: “One app instead of ten.” Conquest copy converts.</p></div>
+    <div class="prow rv"><span class="n">P.04</span><h4>Free the guide</h4><p>HubSpot's <b>Instagram playbook</b> has run since March. The offer is the ad.</p></div>
+  </div>
+</section>
+
+<div class="final">
+  <div class="finalbox rv">
+    <h2>From data to creative.</h2>
+    <p>Direction 08 of 10 — the same 61 ads, nine more visual systems. Pick the one that fits.</p>
+    <a class="btn" href="index.html">Back to all 10 directions</a>
+  </div>
+</div>
+
+<footer><span>Direction 08 — Lapa Ninja</span><span>Research · Sep 18 2026</span></footer>
+
+<script>
+const ADS=[
+{b:"HeadshotPro",t:"paid",c:"AI tools",big:1,h:"Best AI Headshots",x:"Professional business headshots in 2 hours or less. 100% online, no appointments, full refund guarantee.",r:"SINCE FEB 27 2026 · LONGEST RUN"},
+{b:"HubSpot",t:"paid",c:"marketing",h:"Free Instagram Strategies",x:"Ready to see ROI on your Instagram posts? Get the free guide to Instagram for business.",r:"SINCE MAR 24 2026"},
+{b:"Notion",t:"paid",c:"productivity",h:"Solve Work with Notion",x:"Custom AI Agents automate repetitive workflows — weekly reports to ticket triage — on triggers you set.",r:"SINCE AUG 5 2026"},
+{b:"Semrush",t:"paid",c:"marketing",h:"Don't disappear in AI",x:"AI now reads Reddit, LinkedIn, and reviews too — not just your website.",r:"SINCE JUN 5 2026"},
+{b:"Canva",t:"paid",c:"design",h:"Try Canva Magic Layers",x:"Slice any flat image into a fully editable design.",r:"SINCE JUN 5 2026"},
+{b:"Monday.com",t:"paid",c:"productivity",h:"Upgrade from Airtable",x:"More power, flexibility, and speed. Try it free.",r:"SINCE SEP 7 2026"},
+{b:"HyNote",t:"paid",c:"AI tools",h:"AI Note Taker",x:"Comment “notes” for a free pass. #adhd #university #notetaking",r:"SINCE MAY 26 2026"},
+{b:"Duolingo",t:"organic",c:"marketing",h:"The unhinged owl",x:"Mascot chaos — threatens and roasts followers into doing lessons.",r:"ORGANIC · FEB 2025 STUNT"},
+{b:"Descript",t:"organic",c:"marketing",h:"How it started vs. going",x:"Meme-reel arc: scrappy start to polished product. Built for shares.",r:"ORGANIC · MEME FORMAT"}
+];
+const box=document.getElementById('cards');
+ADS.forEach(a=>{
+  const d=document.createElement('div');d.className='card rv'+(a.big?' big':'');d.dataset.t=a.t;d.dataset.c=a.c;
+  d.innerHTML=`<div class="tag">${a.t==='paid'?'<span class="vcheck">✓</span>':'<span style="color:var(--sec)">○</span>'} ${a.t} · ${a.c}</div><h3>${a.b} — “${a.h}”</h3><p>${a.x}</p><div class="foot"><span>${a.r}</span><span class="go">Steal it →</span></div>`;
+  box.appendChild(d);
+});
+document.getElementById('filters').addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('on'));
+  e.target.classList.add('on');const f=e.target.dataset.f;
+  document.querySelectorAll('.card').forEach(c=>{c.style.display=(f==='all'||c.dataset.t===f||c.dataset.c===f)?'flex':'none'});
+});
+document.getElementById('abarx').addEventListener('click',()=>{document.getElementById('abar').style.display='none'});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
